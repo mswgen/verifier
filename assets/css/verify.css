@@ -12,6 +12,11 @@ body {
     padding: 0;
     box-sizing: border-box;
     text-align: center;
+    transition: all .5s ease-in-out .1s;
+    -webkit-transition: all .5s ease-in-out .1s;
+    -moz-transition: all .5s ease-in-out .1s;
+    -o-transition: all .5s ease-in-out .1s;
+    -ms-transition: all .5s ease-in-out .1s;
 }
 
 body::before {
