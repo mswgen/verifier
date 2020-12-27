@@ -1,0 +1,150 @@
+@import url('https://fonts.googleapis.com/css2?family=Nanum+Gothic:wght@400;700;800&family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap');
+
+body {
+    background: url('https://source.unsplash.com/3840x2160/?nature') no-repeat center;
+    background-size: cover;
+    font-family: 'Noto Sans KR', sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    text-align: center;
+}
+
+body::before {
+    content: "";
+    position: absolute;
+    z-index: 1;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background-color: rgba(0,0,0,.7);
+}
+
+#main {
+    position: relative;
+    z-index: 2;
+    color: white;
+    display: none;
+}
+
+#error {
+    position: relative;
+    z-index: 2;
+    color: white;
+    display: none;
+}
+
+#server {
+    display: none;
+}
+
+#settings {
+    display: none;
+}
+
+#loadingbar {
+    position: relative;
+    z-index: 2;
+    color: white;
+}
+
+.dot {
+    width: 10px;
+    height: 10px;
+    background-color: white;
+    border-radius: 100%;
+    margin: 2px;
+    -moz-animation-fill-mode: both;
+    -o-animation-fill-mode: both;
+    animation-fill-mode: both;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+a:visited {
+    text-decoration: none;
+    color: #45d1fb;
+}
+
+a {
+    text-decoration: none;
+    color: #45d1fb;
+}
+
+#dot1 {
+    animation: loading 1s -.6s ease infinite;
+    -webkit-animation: loading 1s -.6s ease infinite;
+    -moz-animation: loading 1s -.6s ease infinite;
+    -o-animation: loading 1s -.6s ease infinite;
+}
+
+#dot2 {
+    animation: loading 1s -.4s ease infinite;
+    -webkit-animation: loading 1s -.4s ease infinite;
+    -moz-animation: loading 1s -.4s ease infinite;
+    -o-animation: loading 1s -.4s ease infinite;
+}
+
+#dot3 {
+    animation: loading 1s -.2s ease infinite;
+    -webkit-animation: loading 1s -.2s ease infinite;
+    -moz-animation: loading 1s -.2s ease infinite;
+    -o-animation: loading 1s -.2s ease infinite;
+}
+
+#dot4 {
+    animation: loading 1s 0s ease infinite;
+    -webkit-animation: loading 1s 0s ease infinite;
+    -moz-animation: loading 1s 0s ease infinite;
+    -o-animation: loading 1s 0s ease infinite;
+}
+
+@keyframes loading {
+    0% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(10px);
+    }
+}
+
+@-webkit-keyframes loading {
+    0% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(10px);
+    }
+}
+
+@-moz-keyframes loading {
+    0% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(10px);
+    }
+}
+
+@-o-keyframes loading {
+    0% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(10px);
+    }
+}
+
+@-ms-keyframes loading {
+    0% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(10px);
+    }
+}

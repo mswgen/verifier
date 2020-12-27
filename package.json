@@ -1,0 +1,26 @@
+{
+  "name": "int-verifier",
+  "version": "1.0.0",
+  "description": "Discord server verification bot made by int Team",
+  "dependencies": {
+    "ascii-table": "0.0.9",
+    "axios": "0.21.1",
+    "discord.js": "12.5.1",
+    "dotenv": "8.2.0",
+    "socket.io": "3.0.4"
+  },
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/int-Team/verifier.git"
+  },
+  "author": "int-Team",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/int-Team/verifier/issues"
+  },
+  "homepage": "https://github.com/int-Team/verifier#readme"
+}
