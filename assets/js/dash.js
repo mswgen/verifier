@@ -21,9 +21,13 @@ window.addEventListener('load', () => {
                 socket.emit('getInfo', gid);
                 socket.once('info', data2 => {
                     document.querySelector('#chid').value = data2.channelId || '';
+                    document.querySelector('#chid').disabled = false;
                     document.querySelector('#msgid').value = data2.messageId || '';
+                    document.querySelector('#msgid').disabled = false;
                     document.querySelector('#unverified').value = data2.unverifiedRole || '';
+                    document.querySelector('#unverified').disabled = false;
                     document.querySelector('#verified').value = data2.verifiedRole || '';
+                    document.querySelector('#verified').disabled = false;
                     document.querySelector('#done').addEventListener('click', () => {
                         socket.emit('subm', {
                             channelId: document.querySelector('#chid').value,
