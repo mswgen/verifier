@@ -30,6 +30,8 @@ window.addEventListener('load', () => {
                     document.querySelector('#verified').disabled = false;
                     document.querySelector('#txt').value = data2.msg || '{서버.이름} 규칙에 동의하신다면 아래 reCAPTCHA를 풀어주세요.'
                     document.querySelector('#txt').disabled = false;
+                    document.querySelector('#verified-msg').value = data2.verifiedMsg || '인증을 완료했어요!';
+                    document.querySelector('#verified-msg').disabled = false;
                     document.querySelector('#done').addEventListener('click', () => {
                         socket.emit('subm', {
                             channelId: document.querySelector('#chid').value,
@@ -37,6 +39,7 @@ window.addEventListener('load', () => {
                             unverifiedRole: document.querySelector('#unverified').value,
                             verifiedRole: document.querySelector('#verified').value,
                             msg: document.querySelector('#txt').value,
+                            verifiedMsg: document.querySelector('#verified-msg').value,
                             guildId: gid
                         });
                         socket.once('submitted', msg => {

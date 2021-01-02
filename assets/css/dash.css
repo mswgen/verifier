@@ -283,15 +283,15 @@ input:disabled {
     transition: border-color .2s ease-in-out;
 }
 
-#txt:hover {
+textarea:hover {
     border-color: #040405;
 }
 
-#txt:focus {
+textarea:focus {
     border-color: #7289da;
 }
 
-#txt:disabled {
+textarea:disabled {
     color: #72767d;
     cursor: wait;
 }

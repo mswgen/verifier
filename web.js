@@ -224,12 +224,16 @@ module.exports = {
                             if (data.msg.length > 200) {
                                 socket.emit('submitted', '인증 페이지 내용은 최대 200자까지 입력할 수 있어요.')
                             }
+                            if (data.verifiedMsg && data.verifiedMsg.length > 2000) {
+                                socket.emit('submitted', '인증 완료 메세지는 최대 2000자까지 입력할 수 있어요.')
+                            }
                             let conf = require('/home/azureuser/data/config.json');
                             conf.guilds[data.guildId] = {
                                 channelId: data.channelId,
                                 messageId: data.messageId,
                                 unverifiedRole: data.unverifiedRole,
                                 verifiedRole: data.verifiedRole,
+                                verifiedMsg: data.verifiedMsg,
                                 msg: data.msg
                             }
                             msg.react('✅');
