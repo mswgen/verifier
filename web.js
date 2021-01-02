@@ -218,12 +218,19 @@ module.exports = {
                                 socket.emit('submitted', '봇이 입력한 인증 완료 역할을 지급할 수 없어요. 역할 순서를 변경해주세요.');
                                 return;
                             }
+                            if (!data.msg) {
+                                socket.emit('submitted', '인증 페이지 내용을 입력해주세요.')
+                            }
+                            if (data.msg.length > 200) {
+                                socket.emit('submitted', '인증 페이지 내용은 최대 200자까지 입력할 수 있어요.')
+                            }
                             let conf = require('/home/azureuser/data/config.json');
                             conf.guilds[data.guildId] = {
                                 channelId: data.channelId,
                                 messageId: data.messageId,
                                 unverifiedRole: data.unverifiedRole,
-                                verifiedRole: data.verifiedRole
+                                verifiedRole: data.verifiedRole,
+                                msg: data.msg
                             }
                             msg.react('✅');
                             fs.writeFile('/home/azureuser/data/config.json', JSON.stringify(conf), () => {

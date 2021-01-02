@@ -28,12 +28,15 @@ window.addEventListener('load', () => {
                     document.querySelector('#unverified').disabled = false;
                     document.querySelector('#verified').value = data2.verifiedRole || '';
                     document.querySelector('#verified').disabled = false;
+                    document.querySelector('#txt').value = data2.msg || '{서버.이름} 규칙에 동의하신다면 아래 reCAPTCHA를 풀어주세요.'
+                    document.querySelector('#txt').disabled = false;
                     document.querySelector('#done').addEventListener('click', () => {
                         socket.emit('subm', {
                             channelId: document.querySelector('#chid').value,
                             messageId: document.querySelector('#msgid').value,
                             unverifiedRole: document.querySelector('#unverified').value,
                             verifiedRole: document.querySelector('#verified').value,
+                            msg: document.querySelector('#txt').value,
                             guildId: gid
                         });
                         socket.once('submitted', msg => {

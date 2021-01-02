@@ -2,14 +2,31 @@
 
 body {
     background: url('https://source.unsplash.com/3840x2160/?nature') no-repeat center;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
     background-size: cover;
     font-family: "Whitney", "Helvetica Neue", "Helvetica", "Noto Sans KR", "Arial", sans-serif;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -moz-box;
+    display: -ms-flexbox;
     display: flex;
+    -webkit-box-pack: center;
+    -webkit-justify-content: center;
+    -moz-box-pack: center;
+    -ms-flex-pack: center;
     justify-content: center;
+    -webkit-box-align: center;
+    -webkit-align-items: center;
+    -moz-box-align: center;
+    -ms-flex-align: center;
     align-items: center;
     height: 100vh;
     margin: 0;
     padding: 0;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
     box-sizing: border-box;
     text-align: center;
     transition: all .5s ease-in-out .1s;
@@ -62,10 +79,13 @@ body::before {
     width: 10px;
     height: 10px;
     background-color: white;
+    -webkit-border-radius: 100%;
+    -moz-border-radius: 100%;
     border-radius: 100%;
     margin: 2px;
     -moz-animation-fill-mode: both;
     -o-animation-fill-mode: both;
+    -webkit-animation-fill-mode: both;
     animation-fill-mode: both;
     display: inline-block;
     vertical-align: middle;
@@ -111,48 +131,52 @@ a {
 
 @keyframes loading {
     0% {
+        -webkit-transform: translateY(0);
+        -moz-transform: translateY(0);
+        -o-transform: translateY(0);
         transform: translateY(0);
     }
     50% {
+        -webkit-transform: translateY(10px);
+        -moz-transform: translateY(10px);
+        -o-transform: translateY(10px);
         transform: translateY(10px);
     }
 }
 
 @-webkit-keyframes loading {
     0% {
+        -webkit-transform: translateY(0);
         transform: translateY(0);
     }
     50% {
+        -webkit-transform: translateY(10px);
         transform: translateY(10px);
     }
 }
 
 @-moz-keyframes loading {
     0% {
+        -moz-transform: translateY(0);
         transform: translateY(0);
     }
     50% {
+        -moz-transform: translateY(10px);
         transform: translateY(10px);
     }
 }
 
 @-o-keyframes loading {
     0% {
+        -o-transform: translateY(0);
         transform: translateY(0);
     }
     50% {
+        -o-transform: translateY(10px);
         transform: translateY(10px);
     }
 }
 
-@-ms-keyframes loading {
-    0% {
-        transform: translateY(0);
-    }
-    50% {
-        transform: translateY(10px);
-    }
-}
 input {
     outline: none;
     padding-top: 10px;
@@ -170,6 +194,8 @@ input {
     font-weight: 400;
     background-color: #40444b;
     border: 1px solid #0000004d;
+    -webkit-border-radius: 8px;
+    -moz-border-radius: 8px;
     border-radius: 8px;
     text-align: center;
     -webkit-transition: border-color .17s ease;
@@ -192,8 +218,11 @@ input:disabled {
     height: 64px;
     margin-right: 10px;
 }
+
 .server-card {
+    display: -ms-grid;
     display: grid;
+    -ms-grid-columns: auto 1fr;
     grid-template-columns: auto 1fr;
     margin-top: 10px;
     margin-bottom: 10px;
@@ -205,6 +234,7 @@ input:disabled {
     cursor: pointer;
     margin-bottom: 28px;
     -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
     box-sizing: border-box;
     width: auto;
     height: 32px;
@@ -214,6 +244,8 @@ input:disabled {
     -moz-transition: background-color .17s ease,color .17s ease;
     transition: background-color .17s ease,color .17s ease;
     border: none;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
     border-radius: 3px;
     font-weight: 500;
     font-size: 14px;
@@ -232,4 +264,34 @@ input:disabled {
 
 #done:active {
     background-color: #5b6eae;
+}
+
+#txt {
+    width: 505px;
+    height: 83px;
+    border: 1px solid #0000004d;
+    resize: none;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+    outline: 0;
+    color: #dcddde;
+    background-color: #40444b;
+    -webkit-transition: border-color .2s ease-in-out;
+    -o-transition: border-color .2s ease-in-out;
+    -moz-transition: border-color .2s ease-in-out;
+    transition: border-color .2s ease-in-out;
+}
+
+#txt:hover {
+    border-color: #040405;
+}
+
+#txt:focus {
+    border-color: #7289da;
+}
+
+#txt:disabled {
+    color: #72767d;
+    cursor: wait;
 }
