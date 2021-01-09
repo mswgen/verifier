@@ -266,7 +266,7 @@ input:disabled {
     background-color: #5b6eae;
 }
 
-#txt {
+textarea {
     width: 505px;
     height: 83px;
     border: 1px solid #0000004d;
