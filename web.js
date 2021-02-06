@@ -176,7 +176,8 @@ module.exports = {
         });
         // httpsServer.listen(4430);
         httpServer.listen(8000);
-        // const io = require('socket.io')(httpsServer);
+        /*
+        const io = require('socket.io')(httpsServer);
         io.on('connection', socket => {
             socket.on('init', token => {
                 axios.get('https://discord.com/api/users/@me', {
@@ -286,6 +287,7 @@ module.exports = {
                     }
                 })
             })
-        });    
+        });  
+        */  
     }
 }
