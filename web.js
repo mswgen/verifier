@@ -8,10 +8,9 @@ const path = require('path');
 const Discord = require('discord.js');
 module.exports = {
     start: client => {
-        /*
         const httpsServer = https.createServer({
-            cert: fs.readFileSync('/etc/letsencrypt/live/int-verifier.eastus.cloudapp.azure.com/fullchain.pem', 'utf8'),
-            key: fs.readFileSync('/etc/letsencrypt/live/int-verifier.eastus.cloudapp.azure.com/privkey.pem', 'utf8')
+            cert: fs.readFileSync('/etc/letsencrypt/live/verifier.intteam.co.kr/fullchain.pem', 'utf8'),
+            key: fs.readFileSync('/etc/letsencrypt/live/verifier.intteam.co.kr/privkey.pem', 'utf8')
         }, (req, res) => {
             let parsed = url.parse(req.url, true);
             if (parsed.pathname.startsWith('/static/')) {
@@ -152,7 +151,6 @@ module.exports = {
                 }
             }
         });
-        */
         const httpServer = http.createServer((req, res) => {
             let parsed = url.parse(req.url, true);
             if (parsed.pathname.startsWith('/.well-known/acme-challenge/')) {
@@ -174,9 +172,8 @@ module.exports = {
                 res.end();
             }
         });
-        // httpsServer.listen(4430);
+        httpsServer.listen(4430);
         httpServer.listen(8000);
-        /*
         const io = require('socket.io')(httpsServer);
         io.on('connection', socket => {
             socket.on('init', token => {
@@ -287,7 +284,6 @@ module.exports = {
                     }
                 })
             })
-        });  
-        */  
+        });
     }
 }
