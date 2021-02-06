@@ -1,3 +1,4 @@
+const https = require('https');
 const http = require('http');
 const axios = require('axios').default;
 const url = require('url');
@@ -7,7 +8,10 @@ const path = require('path');
 const Discord = require('discord.js');
 module.exports = {
     start: client => {
-        const server = http.createServer((req, res) => {
+        const httpsServer = https.createServer({
+            cert: fs.readFileSync('/etc/letsencrypt/live/int-verifier.eastus.cloudapp.azure.com/fullchain.pem', 'utf8'),
+            key: fs.readFileSync('/etc/letsencrypt/live/int-verifier.eastus.cloudapp.azure.com/privkey.pem', 'utf8')
+        }, (req, res) => {
             let parsed = url.parse(req.url, true);
             if (parsed.pathname.startsWith('/static/')) {
                 if (parsed.pathname.startsWith('/static/html/')) {
@@ -107,6 +111,18 @@ module.exports = {
             //     fs.readFile('./assets/js/serviceWorker.js', 'utf8', (err, data) => {
             //         res.end(data);
             //     });
+            } else if (parsed.pathname.startsWith('/.well-known/acme-challenge/')) {
+                fs.readFile(`./.well-known/acme-challenge/${path.parse(parsed.pathname).base}`, 'utf8', (err, data) => {
+                    if (err) {
+                        res.writeHead(404, {
+                            // 'strict-transport-security': 'max-age=86400; includeSubDomains; preload'
+                        });
+                        res.end('404 Not Found');
+                        return;
+                    }
+                    res.writeHead(200);
+                    res.end(data);
+                });
             } else {
                 if (req.headers['user-agent'] && (req.headers['user-agent'].includes('MSIE') || req.headers['user-agent'].includes('rv:11.0'))) {
                     res.writeHead(200, {
@@ -135,8 +151,15 @@ module.exports = {
                 }
             }
         });
-        server.listen(process.env.PORT || 8080);
-        const io = require('socket.io')(server);
+        const httpServer = http.createServer((req, res) => {
+            res.writeHead(302, {
+                'Location': `https://${process.env.DOMAIN}${req.url}`
+            });
+            res.end();
+        });
+        httpsServer.listen(8443);
+        httpServer.listen(8080);
+        const io = require('socket.io')(httpsServer);
         io.on('connection', socket => {
             socket.on('init', token => {
                 axios.get('https://discord.com/api/users/@me', {
