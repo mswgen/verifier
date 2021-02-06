@@ -191,3 +191,7 @@ a {
 #recaptcha:active {
     background-color: #5b6eae;
 }
+
+.grecaptcha-badge {
+    display: none;
+}
