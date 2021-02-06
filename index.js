@@ -86,7 +86,7 @@ client.on('ready', () => {
 });
 client.on('guildMemberAdd', async member => {
     if (member.partial) await member.fetch();
-    let conf = require(`/home/azureuser/data/config.json`);
+    let conf = require(`/home/azureuser/verifier/data/config.json`);
     if (conf.guilds[member.guild.id]) {
         if (conf.guilds[member.guild.id].unverifiedRole) {
             member.roles.add(conf.guilds[member.guild.id].unverifiedRole);
@@ -96,7 +96,7 @@ client.on('guildMemberAdd', async member => {
 client.on('messageReactionAdd', async (r, u) => {
     if (r.partial) await r.fetch();
     if (r.message.partial) await r.message.fetch();
-    let conf = require('/home/azureuser/data/config.json').guilds[r.message.guild.id];
+    let conf = require('/home/azureuser/verifier/data/config.json').guilds[r.message.guild.id];
     if (r.message.channel.id == conf.channelId && r.message.id == conf.messageId && !u.bot) {
         r.users.remove(u.id);
         if ((conf.verifiedRole && client.guilds.cache.get(r.message.guild.id).member(u.id).roles.cache.has(conf.verifiedRole)) || (conf.unverifiedRole && !client.guilds.cache.get(r.message.guild.id).member(u.id).roles.cache.has(conf.unverifiedRole))) return;
@@ -110,18 +110,18 @@ client.on('messageReactionAdd', async (r, u) => {
     }
 });
 client.on('guildCreate', guild => {
-    let conf = require('/home/azureuser/data/config.json');
+    let conf = require('/home/azureuser/verifier/data/config.json');
     conf.guilds[guild.id] = {
         unverifiedRole: undefined,
         verifiedRole: undefined,
         channelId: undefined,
         messageId: undefined
     }
-    fs.writeFileSync('/home/azureuser/data/config.json', JSON.stringify(conf));
+    fs.writeFileSync('/home/azureuser/verifier/data/config.json', JSON.stringify(conf));
 });
 client.on('guildDelete', guild => {
-    let conf = require('/home/azureuser/data/config.json');
+    let conf = require('/home/azureuser/verifier/data/config.json');
     if (conf.guilds[guild.id]) delete conf.guilds[guild.id];
-    fs.writeFileSync('/home/azureuser/data/config.json', JSON.stringify(conf));
+    fs.writeFileSync('/home/azureuser/verifier/data/config.json', JSON.stringify(conf));
 })
 client.login(process.env.TOKEN);

@@ -26,7 +26,7 @@ module.exports = {
                         res.end('reCAPTCHA authentication failed');
                     } else {
                         client.verifyQueue.get(post.token).user.send('인증을 완료했어요!')
-                        let conf = require('/home/azureuser/data/config.json').guilds[client.verifyQueue.get(post.token).guild.id];
+                        let conf = require('/home/azureuser/verifier/data/config.json').guilds[client.verifyQueue.get(post.token).guild.id];
                         if (conf.unverifiedRole) client.guilds.cache.get(client.verifyQueue.get(post.token).guild.id).member(client.verifyQueue.get(post.token).user).roles.remove(conf.unverifiedRole);
                         if (conf.verifiedRole) client.guilds.cache.get(client.verifyQueue.get(post.token).guild.id).member(client.verifyQueue.get(post.token).user).roles.add(conf.verifiedRole);
                         res.writeHead(200, {

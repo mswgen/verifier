@@ -199,7 +199,7 @@ module.exports = {
                     }
                 }).then(x => {
                     if (new Discord.Permissions(x.data.find(a => a.id == guildId).permissions).has('MANAGE_GUILD')) {
-                        socket.emit('info', require('/home/azureuser/data/config.json').guilds[guildId]);
+                        socket.emit('info', require('/home/azureuser/verifier/data/config.json').guilds[guildId]);
                     }
                 })
             });
@@ -250,7 +250,7 @@ module.exports = {
                             if (data.verifiedMsg && data.verifiedMsg.length > 2000) {
                                 socket.emit('submitted', '인증 완료 메세지는 최대 2000자까지 입력할 수 있어요.')
                             }
-                            let conf = require('/home/azureuser/data/config.json');
+                            let conf = require('/home/azureuser/verifier/data/config.json');
                             conf.guilds[data.guildId] = {
                                 channelId: data.channelId,
                                 messageId: data.messageId,
@@ -260,7 +260,7 @@ module.exports = {
                                 msg: data.msg
                             }
                             msg.react('✅');
-                            fs.writeFile('/home/azureuser/data/config.json', JSON.stringify(conf), () => {
+                            fs.writeFile('/home/azureuser/verifier/data/config.json', JSON.stringify(conf), () => {
                                 socket.emit('submitted');
                             });
                         });
