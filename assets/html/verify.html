@@ -46,8 +46,8 @@
         function onloadCallback() {
             grecaptcha.render('recaptcha', {
                 sitekey: '6Lf6JhYaAAAAADcCWTe-ukB_6lCRrIDOmHFeDpg0',
-                theme: 'dark',
-                callback: callback
+                callback: callback,
+                size: 'invisible'
             });
         }
         function callback() {
@@ -76,7 +76,7 @@
         <p>{message}</p>
         <form action="/subm" method="post" id="form">
             <input type="hidden" name="token" value="" id="tkn">
-            <div id="recaptcha"></div>
+            <button id="recaptcha">인증하기</button>
         </form>
     </div>
 </body>
