@@ -7,7 +7,7 @@ module.exports = {
     run: async (client, req, res, parsed) => {
         if (!parsed.query.code) {
             res.writeHead(302, {
-                'Location': `https://discord.com/oauth2/authorize?client_id=${client.user.id}&redirect_uri=${process.env.REDIRECT}&response_type=authorization_code&scope=identify&20guilds`,
+                'Location': `https://discord.com/oauth2/authorize?client_id=${client.user.id}&redirect_uri=${process.env.REDIRECT}&response_type=code&scope=identify&20guilds`,
                 // 'strict-transport-security': 'max-age=86400; includeSubDomains; preload'
             });
             res.end();
