@@ -30,6 +30,9 @@ module.exports = {
                 res.end();
             }
         });
+        httpServer.listen(8000, () => {
+            console.log('http server started');
+        });
         const httpsServer = https.createServer({
             cert: fs.readFileSync('/etc/letsencrypt/live/verifier.intteam.co.kr/fullchain.pem', 'utf8'),
             key: fs.readFileSync('/etc/letsencrypt/live/verifier.intteam.co.kr/privkey.pem', 'utf8')
@@ -161,8 +164,9 @@ module.exports = {
                 }
             }
         });
-        httpsServer.listen(4430);
-        httpServer.listen(8000);
+        httpsServer.listen(4430, () => {
+            console.log('https server started');
+        });
         const io = require('socket.io')(httpsServer);
         io.on('connection', socket => {
             socket.on('init', token => {
