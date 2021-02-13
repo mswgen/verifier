@@ -133,18 +133,6 @@ module.exports = {
             //     fs.readFile('./assets/js/serviceWorker.js', 'utf8', (err, data) => {
             //         res.end(data);
             //     });
-            } else if (parsed.pathname.startsWith('/.well-known/acme-challenge/')) {
-                fs.readFile(`./.well-known/acme-challenge/${path.parse(parsed.pathname).base}`, 'utf8', (err, data) => {
-                    if (err) {
-                        res.writeHead(404, {
-                            // 'strict-transport-security': 'max-age=86400; includeSubDomains; preload'
-                        });
-                        res.end('404 Not Found');
-                        return;
-                    }
-                    res.writeHead(200);
-                    res.end(data);
-                });
             } else {
                 if (req.headers['user-agent'] && (req.headers['user-agent'].includes('MSIE') || req.headers['user-agent'].includes('rv:11.0'))) {
                     res.writeHead(200, {
@@ -173,8 +161,8 @@ module.exports = {
                 }
             }
         });
-        httpServer.listen(8000);
         httpsServer.listen(4430);
+        httpServer.listen(8000);
         const io = require('socket.io')(httpsServer);
         io.on('connection', socket => {
             socket.on('init', token => {
