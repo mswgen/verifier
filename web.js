@@ -6,7 +6,7 @@ const qs = require('querystring');
 const path = require('path');
 const Discord = require('discord.js');
 module.exports = {
-    start: client => {
+    start: async client => {
         const httpServer = http2.createServer((req, res) => {
             let parsed = url.parse(req.url, true);
             if (parsed.pathname.startsWith('/.well-known/acme-challenge/')) {
