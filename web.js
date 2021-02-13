@@ -1,4 +1,5 @@
 const http2 = require('http2');
+const http = require('http');
 const axios = require('axios').default;
 const url = require('url');
 const fs = require('fs');
@@ -7,7 +8,7 @@ const path = require('path');
 const Discord = require('discord.js');
 module.exports = {
     start: async client => {
-        const httpServer = http2.createServer((req, res) => {
+        const httpServer = http.createServer((req, res) => {
             let parsed = url.parse(req.url, true);
             if (parsed.pathname.startsWith('/.well-known/acme-challenge/')) {
                 fs.readFile(`./.well-known/acme-challenge/${path.parse(parsed.pathname).base}`, 'utf8', (err, data) => {
