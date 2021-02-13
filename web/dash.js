@@ -6,10 +6,11 @@ module.exports = {
     method: 'GET',
     run: async (client, req, res, parsed) => {
         if (!parsed.query.code) {
-            res.writeHead(401, {
+            res.writeHead(302, {
+                'Location': `https://discord.com/oauth2/authorize?client_id=${client.user.id}&redirect_uri=${process.env.REDIRECT}&response_type=authorization_code&scope=identify&20guilds`,
                 // 'strict-transport-security': 'max-age=86400; includeSubDomains; preload'
             });
-            res.end('Discord authentication cancled');
+            res.end();
         } else {
             axios.post('https://discord.com/api/oauth2/token', qs.stringify({
                 client_id: client.user.id,
