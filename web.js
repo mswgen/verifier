@@ -1,5 +1,6 @@
 const http2 = require('http2');
 const http = require('http');
+const https = require('https');
 const axios = require('axios').default;
 const url = require('url');
 const fs = require('fs');
@@ -29,8 +30,7 @@ module.exports = {
                 res.end();
             }
         });
-        httpServer.listen(8000);
-        const httpsServer = http2.createSecureServer({
+        const httpsServer = https.createServer({
             cert: fs.readFileSync('/etc/letsencrypt/live/verifier.intteam.co.kr/fullchain.pem', 'utf8'),
             key: fs.readFileSync('/etc/letsencrypt/live/verifier.intteam.co.kr/privkey.pem', 'utf8')
         }, (req, res) => {
@@ -173,6 +173,7 @@ module.exports = {
                 }
             }
         });
+        httpServer.listen(8000);
         httpsServer.listen(4430);
         const io = require('socket.io')(httpsServer);
         io.on('connection', socket => {
