@@ -7,6 +7,28 @@ const path = require('path');
 const Discord = require('discord.js');
 module.exports = {
     start: client => {
+        const httpServer = http2.createServer((req, res) => {
+            let parsed = url.parse(req.url, true);
+            if (parsed.pathname.startsWith('/.well-known/acme-challenge/')) {
+                fs.readFile(`./.well-known/acme-challenge/${path.parse(parsed.pathname).base}`, 'utf8', (err, data) => {
+                    if (err) {
+                        res.writeHead(404, {
+                            // 'strict-transport-security': 'max-age=86400; includeSubDomains; preload'
+                        });
+                        res.end('404 Not Found');
+                        return;
+                    }
+                    res.writeHead(200);
+                    res.end(data);
+                });
+            } else {
+                res.writeHead(302, {
+                    'Location': `https://${process.env.DOMAIN}${req.url}`
+                });
+                res.end();
+            }
+        });
+        httpServer.listen(8000);
         const httpsServer = http2.createSecureServer({
             cert: fs.readFileSync('/etc/letsencrypt/live/verifier.intteam.co.kr/fullchain.pem', 'utf8'),
             key: fs.readFileSync('/etc/letsencrypt/live/verifier.intteam.co.kr/privkey.pem', 'utf8')
@@ -150,29 +172,7 @@ module.exports = {
                 }
             }
         });
-        const httpServer = http2.createServer((req, res) => {
-            let parsed = url.parse(req.url, true);
-            if (parsed.pathname.startsWith('/.well-known/acme-challenge/')) {
-                fs.readFile(`./.well-known/acme-challenge/${path.parse(parsed.pathname).base}`, 'utf8', (err, data) => {
-                    if (err) {
-                        res.writeHead(404, {
-                            // 'strict-transport-security': 'max-age=86400; includeSubDomains; preload'
-                        });
-                        res.end('404 Not Found');
-                        return;
-                    }
-                    res.writeHead(200);
-                    res.end(data);
-                });
-            } else {
-                res.writeHead(302, {
-                    'Location': `https://${process.env.DOMAIN}${req.url}`
-                });
-                res.end();
-            }
-        });
         httpsServer.listen(4430);
-        httpServer.listen(8000);
         const io = require('socket.io')(httpsServer);
         io.on('connection', socket => {
             socket.on('init', token => {
