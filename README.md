@@ -1,1 +1,1 @@
-# vertifier
+# verifier
