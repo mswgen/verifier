@@ -272,7 +272,7 @@ module.exports = {
                             });
                         });
                     } else {
-                        socket.emit('submitted', '이 서버의 설정은 바꿀 수 없어요');
+                        socket.emit('submitted', '해당 서버의 설정은 바꿀 수 없어요');
                     }
                 })
             })
