@@ -6,8 +6,9 @@ import fs from 'fs'
 import path from 'path'
 import Discord from 'discord.js'
 import io from 'socket.io'
+import type mongodb from 'mongodb'
 module.exports = {
-  start: async (client:Discord.Client) => {
+  start: async (client:Discord.Client, db:{serverConf:mongodb.Collection, notifications:mongodb.Collection}) => {
     const httpServer = http.createServer((req, res) => {
       let parsed = url.parse(req.url as string, true)
       if ((parsed.pathname as string).startsWith('/.well-known/acme-challenge/')) {
@@ -148,7 +149,7 @@ module.exports = {
         }
         if ((client as any).paths.get(parsed.pathname)) {
           if ((client as any).paths.get(parsed.pathname).method as string == req.method) {
-            (client as any).paths.get(parsed.pathname).run(client, req, res, parsed)
+            (client as any).paths.get(parsed.pathname).run(client, db, req, res, parsed)
           } else {
             res.writeHead(405, {
               // 'strict-transport-security': 'max-age=86400; includeSubDomains; preload'
@@ -205,9 +206,9 @@ module.exports = {
           headers: {
             Authorization: (socket as any).token
           }
-        }).then(x => {
+        }).then(async x => {
           if (new Discord.Permissions(x.data.find((a:Discord.Guild) => a.id == guildId).permissions).has('MANAGE_GUILD')) {
-            socket.emit('info', require('/home/azureuser/verifier/data/config.json').guilds[guildId])
+            socket.emit('info', await db.serverConf.findOne({_id: guildId}))
           }
         })
       })
@@ -232,7 +233,7 @@ module.exports = {
             }
             (client.guilds.cache.get(data.guildId)!.channels.cache.find(x => x.id == data.channelId) as Discord.TextChannel).messages.fetch(data.messageId).catch(() => {
               socket.emit('submitted', '입력한 메세지를 찾을 수 없어요')
-            }).then(msg => {
+            }).then(async msg => {
               if (data.unverifiedRole && !client.guilds.cache.get(data.guildId)!.roles.cache.get(data.unverifiedRole)) {
                 socket.emit('submitted', '입력한 미인증 역할을 찾을 수 없어요')
                 return
@@ -258,19 +259,18 @@ module.exports = {
               if (data.verifiedMsg && data.verifiedMsg.length > 2000) {
                 socket.emit('submitted', '인증 완료 메세지는 최대 2000자까지 입력할 수 있어요.')
               }
-              let conf = require('/home/azureuser/verifier/data/config.json')
-              conf.guilds[data.guildId] = {
-                channelId: data.channelId,
-                messageId: data.messageId,
-                unverifiedRole: data.unverifiedRole,
-                verifiedRole: data.verifiedRole,
-                verifiedMsg: data.verifiedMsg,
-                msg: data.msg
-              };
-              (msg as Discord.Message).react('✅')
-              fs.writeFile('/home/azureuser/verifier/data/config.json', JSON.stringify(conf), () => {
-                socket.emit('submitted')
-              })
+              await db.serverConf.updateOne({_id: data.guildId}, {
+                $set: {
+                  channelId: data.channelId,
+                  messageId: data.messageId,
+                  unverifiedRole: data.unverifiedRole,
+                  verifiedRole: data.verifiedRole,
+                  verifiedMsg: data.verifiedMsg,
+                  msg: data.msg
+                }
+              });
+              await (msg as Discord.Message).react('✅')
+              socket.emit('submitted')
             })
           } else {
             socket.emit('submitted', '해당 서버의 설정은 바꿀 수 없어요')

@@ -7,7 +7,7 @@ import type url from 'url'
 module.exports = {
   pathname: '/dash',
   method: 'GET',
-  run: async (client:Discord.Client, req:http.IncomingMessage, res:http.ServerResponse, parsed:url.UrlWithParsedQuery) => {
+  run: async (client:Discord.Client, _db:any, req:http.IncomingMessage, res:http.ServerResponse, parsed:url.UrlWithParsedQuery) => {
     if (!parsed.query.code) {
       res.writeHead(302, {
         'Location': `https://discord.com/oauth2/authorize?client_id=${client.user!.id}&redirect_uri=${process.env.REDIRECT}&response_type=code&scope=identify%20guilds`,
