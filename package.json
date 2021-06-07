@@ -22,5 +22,8 @@
   "bugs": {
     "url": "https://github.com/int-Team/verifier/issues"
   },
-  "homepage": "https://github.com/int-Team/verifier#readme"
+  "homepage": "https://github.com/int-Team/verifier#readme",
+  "devDependencies": {
+    "eslint": "^7.28.0"
+  }
 }
