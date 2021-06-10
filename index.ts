@@ -4,7 +4,12 @@ import mongodb from 'mongodb'
 import dotenv from 'dotenv'
 dotenv.config()
 const client = new Discord.Client({
-  partials: ['MESSAGE', 'REACTION', 'GUILD_MEMBER', 'USER']
+  partials: ['MESSAGE', 'REACTION', 'GUILD_MEMBER', 'USER'],
+  ws: {
+    properties: {
+      $browser: 'Discord Android'
+    }
+  }
 });
 (client as any).paths = new Discord.Collection();
 (client as any).verifyQueue = new Discord.Collection();
