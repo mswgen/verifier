@@ -10,6 +10,8 @@ post('/api/getconf', window.guildInfo.id, {
   document.querySelector('#messageid').value = resp.messageid
   document.querySelector('#unverified').value = resp.unverified
   document.querySelector('#verified').value = resp.verified
+  document.querySelector('#msg').value = resp.msg
+  document.querySelector('#verifiedmsg').value = resp.verifiedmsg
   document.querySelector('#channelid').addEventListener('change', e => {
     post('/api/editconf', JSON.stringify({
       guildid: window.guildInfo.id,
@@ -44,7 +46,7 @@ post('/api/getconf', window.guildInfo.id, {
   document.querySelector('#unverified').addEventListener('change', e => {
     post('/api/editconf', JSON.stringify({
       guildid: window.guildInfo.id,
-      unverified: document.querySelector('#unverified').value | 'none'
+      unverified: document.querySelector('#unverified').value || 'none'
     }), {
       Authorization: window.accessToken
     }, 'text').then(r => {
@@ -59,7 +61,37 @@ post('/api/getconf', window.guildInfo.id, {
   document.querySelector('#verified').addEventListener('change', e => {
     post('/api/editconf', JSON.stringify({
       guildid: window.guildInfo.id,
-      verified: document.querySelector('#verified').value | 'none'
+      verified: document.querySelector('#verified').value || 'none'
+    }), {
+      Authorization: window.accessToken
+    }, 'text').then(r => {
+      if (r == 'error') {
+        alert('이 서버의 설정을 바꿀 수 없어요.')
+        fetchPage('/static/html/mounts/guildselect.html')
+      } else if (r != 'ok') {
+        alert(r)
+      }
+    })
+  })
+  document.querySelector('#verifiedmsg').addEventListener('change', e => {
+    post('/api/editconf', JSON.stringify({
+      guildid: window.guildInfo.id,
+      verifiedmsg: document.querySelector('#verifiedmsg').value || 'none'
+    }), {
+      Authorization: window.accessToken
+    }, 'text').then(r => {
+      if (r == 'error') {
+        alert('이 서버의 설정을 바꿀 수 없어요.')
+        fetchPage('/static/html/mounts/guildselect.html')
+      } else if (r != 'ok') {
+        alert(r)
+      }
+    })
+  })
+  document.querySelector('#msg').addEventListener('change', e => {
+    post('/api/editconf', JSON.stringify({
+      guildid: window.guildInfo.id,
+      msg: document.querySelector('#msg').value 
     }), {
       Authorization: window.accessToken
     }, 'text').then(r => {

@@ -40,7 +40,7 @@ module.exports = {
                     }
                     if (post.messageid) {
                         try {
-                            let msg = await (client.guilds.cache.get(post.guildid)!.channels.cache.find(x => x.id == post.channelid) as Discord.TextChannel).messages.fetch(post.messageid)       
+                            let msg = await (client.guilds.cache.get(post.guildid)!.channels.cache.find(x => x.id == post.channelid) as Discord.TextChannel).messages.fetch(post.messageid)
                             msg?.react('✅')
                         } catch (e) {
                             res.writeHead(200)
@@ -53,7 +53,7 @@ module.exports = {
                         res.end('입력한 미인증 역할을 찾을 수 없어요')
                         return
                     }
-                    
+
                     if (post.unverified && post.unverified != 'none' && client.guilds.cache.get(post.guildid)!.roles.cache.get(post.unverified)!.position >= client.guilds.cache.get(post.guildid)!.me!.roles.highest.position) {
                         res.writeHead(200)
                         res.end('봇이 입력한 미인증 역할을 지급할 수 없어요. 역할 순서를 변경해주세요.')
@@ -69,24 +69,42 @@ module.exports = {
                         res.end('봇이 입력한 인증 완료 역할을 지급할 수 없어요. 역할 순서를 변경해주세요.')
                         return
                     }
-                    let prevConf = await db.serverConf.findOne({_id: post.guildid})
+                    if (post.msg && post.msg.length > 200) {
+                        res.writeHead(200)
+                        res.end('인증 페이지 내용은 최대 200자까지 입력할 수 있어요.')
+                        return
+                    }
+                    if (post.verifiedmsg && post.verifiedmsg.length > 2000) {
+                        res.writeHead(200)
+                        res.end('인증 완료 메세지는 최대 2000자까지 입력할 수 있어요.')
+                        return
+                    }
+                    let prevConf = await db.serverConf.findOne({ _id: post.guildid })
                     if (post.channelid) prevConf.channelId = post.channelid
                     if (post.messageid) prevConf.messageId = post.messageid
-                    if (post.verified)  {
+                    if (post.verified) {
                         if (post.verified == 'none') {
                             prevConf.verifiedRole = null
                         } else {
                             prevConf.verifiedRole = post.verified
                         }
                     }
-                    if (post.unverified)  {
+                    if (post.unverified) {
                         if (post.unverified == 'none') {
                             prevConf.unverifiedRole = null
                         } else {
                             prevConf.unverifiedRole = post.unverified
                         }
                     }
-                    await db.serverConf.updateOne({_id: post.guildid}, {
+                    if (post.msg) prevConf.msg = post.msg
+                    if (post.verifiedmsg) {
+                        if (post.verifiedmsg == 'none') {
+                            prevConf.verifiedMsg = null
+                        } else {
+                            prevConf.verifiedMsg = post.verifiedmsg
+                        }
+                    }
+                    await db.serverConf.updateOne({ _id: post.guildid }, {
                         $set: prevConf
                     })
                     res.writeHead(200)
