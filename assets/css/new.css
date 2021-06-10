@@ -1,0 +1,135 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+    font-family: -apple-system, "Apple SD Gothic Neo", Ubuntu, Helvetica, "Noto Sans KR", "Malgun Gothic", sans-serif;
+    scroll-behavior: smooth;
+}
+
+
+.hero-text {
+    margin-top: max(40px, 8vw);
+    margin-left: 5vw;
+    margin-bottom: max(100px, 18vw);
+}
+
+.membercard {
+    max-width: 15rem;
+}
+
+.hero-image {
+    height: 95%
+}
+
+
+ul {
+    margin: 150px auto 0;
+    padding: 0;
+    list-style: none;
+    display: table;
+    width: 600px;
+    text-align: center;
+}
+
+li {
+    display: table-cell;
+    position: relative;
+    padding: 15px 0;
+}
+
+.underline {
+    text-transform: uppercase;
+    text-decoration: none;
+    letter-spacing: 0.1em;
+
+
+    position: relative;
+}
+
+.underline:after {
+    background: none repeat scroll 0 0 transparent;
+    bottom: 0;
+    content: "";
+    display: block;
+    height: 2px;
+    left: 50%;
+    position: absolute;
+    background: #000;
+    transition: width 0.1s ease 0s, left 0.1s ease 0s;
+    width: 0;
+}
+
+.dark .underline:after {
+    background: none repeat scroll 0 0 transparent;
+    bottom: 0;
+    content: "";
+    display: block;
+    height: 2px;
+    left: 50%;
+    position: absolute;
+    background: #FFF;
+    transition: width 0.1s ease 0s, left 0.1s ease 0s;
+    width: 0;
+}
+
+.underline:hover:after {
+    width: 100%;
+    left: 0;
+}
+
+
+.profile {
+    border-radius: 9999px;
+    border-width: 1px;
+    width: 70px;
+    height: 70px;
+}
+
+.hero-light {
+    opacity: 1;
+
+}
+
+
+.dark .hero-dark {
+    opacity: 1;
+}
+
+.hero-dark {
+    opacity: 0;
+    transition: opacity 200ms ease-in-out;
+}
+
+
+.nav {
+    opacity: 0;
+    transition: opacity 200ms ease-out;
+}
+
+.nav.show {
+    opacity: 0.5;
+}
+
+.mobile-nav {
+    width: 45%;
+}
+
+@media (min-width: 640px) {
+    .mobile-nav {
+        width: 30%;
+    }
+}
+
+.infinite_rotating_logo {
+    animation: rotate_image 10s linear infinite;
+    transform-origin: 50% 50%;
+}
+
+@keyframes rotate_image {
+    100% {
+        transform: rotate(360deg);
+    }
+}

@@ -13,7 +13,13 @@
   },
   "main": "dist/index.js",
   "scripts": {
-    "start": "rm -rf dist && tsc && node dist/index.js"
+    "start": "node dist/index.js",
+    "postcss": "cross-env NODE_ENV=production postcss -u autoprefixer tailwindcss -o assets/css/compiled.css assets/css/new.css",
+    "postcss:dev": "cross-env NODE_ENV=development postcss -u autoprefixer tailwindcss -o assets/css/compiled.css assets/css/new.css",
+    "tsc": "rm -rf dist && tsc",
+    "lint": "eslint --fix .",
+    "build": "yarn postcss && yarn tsc",
+    "dev": "yarn postcss:dev && yarn tsc"
   },
   "repository": {
     "type": "git",
@@ -27,7 +33,12 @@
   "homepage": "https://github.com/Team-int/verifier#readme",
   "devDependencies": {
     "@types/node": "^15.12.1",
+    "autoprefixer": "^10.2.6",
+    "cross-env": "^7.0.3",
     "eslint": "^7.28.0",
+    "postcss": "^8.3.0",
+    "postcss-cli": "^8.3.1",
+    "tailwindcss": "^2.1.4",
     "typescript": "^4.3.2"
   }
 }

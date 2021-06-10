@@ -40,20 +40,37 @@ module.exports = {
       let parsed = url.parse(req.url as string, true)
       if ((parsed.pathname as string).startsWith('/static/')) {
         if ((parsed.pathname as string).startsWith('/static/html/')) {
-          fs.readFile(`./assets/html/${path.parse(parsed.pathname as string).base}`, 'utf8', (err, data) => {
-            if (err) {
-              res.writeHead(404, {
+          if ((parsed.pathname as string).startsWith('/static/html/mounts/')) {
+            fs.readFile(`./assets/html/mounts/${path.parse(parsed.pathname as string).base}`, 'utf8', (err, data) => {
+              if (err) {
+                res.writeHead(404, {
+                  // 'strict-transport-security': 'max-age=86400; includeSubDomains; preload'
+                })
+                res.end('404 Not Found')
+                return
+              }
+              res.writeHead(200, {
+                'Content-Type': 'text/html; charset=UTF-8',
                 // 'strict-transport-security': 'max-age=86400; includeSubDomains; preload'
               })
-              res.end('404 Not Found')
-              return
-            }
-            res.writeHead(200, {
-              'Content-Type': 'text/html; charset=UTF-8',
-              // 'strict-transport-security': 'max-age=86400; includeSubDomains; preload'
+              res.end(data)
             })
-            res.end(data)
-          })
+          } else {
+            fs.readFile(`./assets/html/${path.parse(parsed.pathname as string).base}`, 'utf8', (err, data) => {
+              if (err) {
+                res.writeHead(404, {
+                  // 'strict-transport-security': 'max-age=86400; includeSubDomains; preload'
+                })
+                res.end('404 Not Found')
+                return
+              }
+              res.writeHead(200, {
+                'Content-Type': 'text/html; charset=UTF-8',
+                // 'strict-transport-security': 'max-age=86400; includeSubDomains; preload'
+              })
+              res.end(data)
+            })
+          }
         } else if ((parsed.pathname as string).startsWith('/static/css/')) {
           fs.readFile(`./assets/css/${path.parse(parsed.pathname as string).base}`, 'utf8', (err, data) => {
             if (err) {
@@ -84,8 +101,8 @@ module.exports = {
             })
             res.end(data)
           })
-        } else if ((parsed.pathname as string).startsWith('/static/image/')) {
-          fs.readFile(`./assets/image/${path.parse(parsed.pathname as string).base}`, (err, data) => {
+        } else if ((parsed.pathname as string).startsWith('/static/image/svg/')) {
+          fs.readFile(`./assets/image/svg/${path.parse(parsed.pathname as string).base}`, 'utf8', (err, data) => {
             if (err) {
               res.writeHead(404, {
                 // 'strict-transport-security': 'max-age=86400; includeSubDomains; preload'
@@ -94,7 +111,22 @@ module.exports = {
               return
             }
             res.writeHead(200, {
-              'Content-Type': 'image/png',
+              'Content-Type': 'image/svg+xml',
+              // 'strict-transport-security': 'max-age=86400; includeSubDomains; preload'
+            })
+            res.end(data)
+          })
+        } else if ((parsed.pathname as string).startsWith('/static/image/webp/')) {
+          fs.readFile(`./assets/image/webp/${path.parse(parsed.pathname as string).base}`, (err, data) => {
+            if (err) {
+              res.writeHead(404, {
+                // 'strict-transport-security': 'max-age=86400; includeSubDomains; preload'
+              })
+              res.end('404 Not Found')
+              return
+            }
+            res.writeHead(200, {
+              'Content-Type': 'image/webp',
               // 'strict-transport-security': 'max-age=86400; includeSubDomains; preload'
             })
             res.end(data)

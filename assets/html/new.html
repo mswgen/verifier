@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="ko" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>verifier</title>
+    <link rel="icon" href="/static/image/webp/inticon.webp">
+    <link rel="stylesheet" href="/static/css/compiled.css">
+    <script src="/static/js/spa.js" async defer></script>
+</head>
+<body>
+<div id="header" class="z-10 text-black  transition-colors duration-200">
+    <div id="nav"
+         class="z-10 text-black transition-colors duration-200 shadow transition-colors duration 200 fixed px-4 md:px-6 py-5 md:py-6 bg-white text-black dark:bg-gray-800 z-50 w-full h-16 md:h-20">
+        <div class="max-w-8xl m-auto md:px-2">
+            <div class="flex justify-between items-center">
+                <div class="flex items-center">
+                    <img alt="logo" src="/static/image/webp/inticon.webp" height=30 width=30>
+                    <div class=" pl-2 ">
+                        <button class="spa-link-root focus:outline-none">
+                            <span class="text-xl md:text-2xl font-semibold tracking-tight flex items-center flex-shrink-0  md:mr-6 text-black  dark:text-white">
+                                Verifier
+                            </span>
+                        </button>
+                    </div>
+                    <div class="hidden md:flex items-center  text-lg  text-black  dark:text-white mx-6">
+                        <button class="spa-link-about focus:outline-none">소개</button>
+                    </div>
+                    <div class="hidden md:flex items-center text-lg  text-black  dark:text-white mx-6">
+                        <button class="spa-link-help focus:outline-none">지원</button>
+                    </div>
+                    <div class="hidden md:flex items-center text-lg  text-black  dark:text-white mx-6">
+                        <button class="spa-link-verify focus:outline-none">인증</button>
+                    </div>
+                    <div class="hidden md:flex items-center text-lg  text-black  dark:text-white mx-6">
+                        <button class="spa-link-invite focus:outline-none">초대하기</button>
+                    </div>
+                    <div class="hidden md:flex items-center text-lg  text-black  dark:text-white mx-6">
+                        <button class="spa-link-dash focus:outline-none">대시보드</button>
+                    </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<main class="pt-14 md:pt-20 text-gray-800 dark:text-gray-100 bg-white dark:bg-primary z-10 relative transition-colors duration-200">
+    <div class="w-full transition-all relative z-0 hero flex sm:px-0 duration-200 " id="banner">
+        <img
+                alt=""
+                class="hero-light absolute hero-image  w-full object-cover bg-cover bg-center"
+                src="/static/image/svg/light.svg"
+        />
+        <img
+                alt=""
+                class="hero-dark  absolute hero-image w-full object-cover bg-cover bg-center "
+                src="/static/image/svg/mountain.svg"
+        />
+
+        <div class="inset-0 w-full  absolute z-0 bg-black opacity-10 "></div>
+        <div class="mx-2 px-4 hero-text z-10 ">
+            <div class="text-5xl sm:text-6xl md:text-9xl font-bold text-white ">Verifier</div>
+            <div class="mt-3 md:mt-8 ">
+                <button
+                        class="focus:outline-none bg-white text-gray-800 font-semibold text-sm md:text-lg py-2 px-2 md:py-3 md:px-4 uppercase text-semibold rounded-lg shadow sm:ml-5 spa-link-about"
+                >
+                    about
+                </button>
+            </div>
+        </div>
+    </div>
+    <div class="transtition-colors duration-200  mx-auto rounded-2xl transform -translate-y-12 bg-white dark:bg-primary" id="mount"></div>
+</main>
+</body>
+</html>
