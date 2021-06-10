@@ -1,7 +1,8 @@
 import axios from 'axios'
 import Discord from 'discord.js'
 import type http from 'http'
-module.exports = {
+
+export default {
   pathname: '/api/getguilds',
   method: 'POST',
   run: async (client:Discord.Client, _db:any, req:http.IncomingMessage, res:http.ServerResponse) => {

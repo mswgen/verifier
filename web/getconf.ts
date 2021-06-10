@@ -2,7 +2,8 @@ import axios from 'axios'
 import Discord from 'discord.js'
 import type http from 'http'
 import type mongodb from 'mongodb'
-module.exports = {
+
+export default {
   pathname: '/api/getconf',
   method: 'POST',
   run: async (client:Discord.Client, db:{serverConf: mongodb.Collection, notifications: mongodb.Collection}, req:http.IncomingMessage, res:http.ServerResponse) => {

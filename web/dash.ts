@@ -4,7 +4,8 @@ import fs from 'fs'
 import type Discord from 'discord.js'
 import type http from 'http'
 import type url from 'url'
-module.exports = {
+
+export default {
   pathname: '/dash',
   method: 'GET',
   run: async (client:Discord.Client, _db:any, req:http.IncomingMessage, res:http.ServerResponse, parsed:url.UrlWithParsedQuery) => {

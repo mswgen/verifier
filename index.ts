@@ -1,7 +1,8 @@
 import Discord from 'discord.js'
 import fs from 'fs'
 import mongodb from 'mongodb'
-require('dotenv').config()
+import dotenv from 'dotenv'
+dotenv.config()
 const client = new Discord.Client({
   partials: ['MESSAGE', 'REACTION', 'GUILD_MEMBER', 'USER']
 });
