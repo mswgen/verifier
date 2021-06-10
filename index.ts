@@ -31,7 +31,7 @@ MongoClient.connect().then(() => {
   fs.readdir('./dist/web/', (err: any, list: Array<string>) => {
     for (let file of list.filter(x => x.endsWith(('.js')))) {
       try {
-        let pull = require(`./web/${file}`)
+        let pull = require(`./web/${file}`).default
         if (pull.pathname && pull.run && pull.method) {
           table.addRow(file, '✅');
           (client as any).paths.set(pull.pathname, pull)
