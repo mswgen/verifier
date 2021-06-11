@@ -10,13 +10,14 @@ let cacheFiles = [
   '/static/image/png/inticon-144.png',
   '/static/image/png/inticon-512.png'
 ]
-let name = 'chche-v4'
+let name = 'chche-v5'
 self.addEventListener('install', evt => {
   evt.waitUntil(
     caches.open(name).then(cache => {
       return cache.addAll(cacheFiles)
     })
   )
+  self.skipWaiting()
 })
 self.addEventListener('activate', event => {
   event.waitUntil(
