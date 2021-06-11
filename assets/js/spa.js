@@ -37,6 +37,11 @@ function init () {
       document.location.href = 'https://discord.gg/nKaM6RrN92'
     })
   }
+  for (let element of Array.from(document.querySelectorAll('.spa-link-invite'))) {
+    element.addEventListener('click', () => {
+      document.location.href = 'https://discord.com/oauth2/authorize?client_id=791863119843819520&permissions=8&scope=bot'
+    })
+  }
   for (let element of Array.from(document.querySelectorAll('.spa-link-dash'))) {
     element.addEventListener('click', () => {
       if (localStorage.getItem('discord')) {
