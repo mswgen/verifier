@@ -1,6 +1,7 @@
 window.addEventListener('load', init)
 
 function init () {
+  window.showHamburger = false
   if (getParam('state')) {
     if (getParam('state') == 'dash') {
       if (!getParam('code')) {
@@ -35,6 +36,16 @@ function init () {
       }
     })
   }
+  for (let element of Array.from(document.querySelectorAll('.mobile-nav-item'))) {
+    element.addEventListener('click', () => {
+      setTimeout(() => {
+        hamburger(false)
+      }, 0.5)
+    })
+  }
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('/serviceWorker.js')
+  }
 }
 
 function getParam(sname) {
@@ -65,4 +76,23 @@ async function post(path, body, headers, dataType) {
   })
   const d = await stream[dataType]()
   return d
+}
+
+function hamburger(show) {
+  window.showHamburger = show
+  if (show == true) {
+    document.querySelector('#hamburgermenu').classList.add('shadow-2xl')
+    document.querySelector('#hamburgermenu').classList.add('ease-out')
+    document.querySelector('#hamburgermenu').classList.add('translate-x-0')
+    document.querySelector('#hamburgermenu').classList.remove('shadow-none')
+    document.querySelector('#hamburgermenu').classList.remove('ease-in')
+    document.querySelector('#hamburgermenu').classList.remove('translate-x-full')
+  } else {
+    document.querySelector('#hamburgermenu').classList.remove('shadow-2xl')
+    document.querySelector('#hamburgermenu').classList.remove('ease-out')
+    document.querySelector('#hamburgermenu').classList.remove('translate-x-0')
+    document.querySelector('#hamburgermenu').classList.add('shadow-none')
+    document.querySelector('#hamburgermenu').classList.add('ease-in')
+    document.querySelector('#hamburgermenu').classList.add('translate-x-full')
+  }
 }

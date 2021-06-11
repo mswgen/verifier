@@ -101,6 +101,21 @@ module.exports = {
             })
             res.end(data)
           })
+        } else if ((parsed.pathname as string).startsWith('/static/image/png/')) {
+          fs.readFile(`./assets/image/png/${path.parse(parsed.pathname as string).base}`, (err, data) => {
+            if (err) {
+              res.writeHead(404, {
+                // 'strict-transport-security': 'max-age=86400; includeSubDomains; preload'
+              })
+              res.end('404 Not Found')
+              return
+            }
+            res.writeHead(200, {
+              'Content-Type': 'image/png',
+              // 'strict-transport-security': 'max-age=86400; includeSubDomains; preload'
+            })
+            res.end(data)
+          })
         } else if ((parsed.pathname as string).startsWith('/static/image/svg/')) {
           fs.readFile(`./assets/image/svg/${path.parse(parsed.pathname as string).base}`, 'utf8', (err, data) => {
             if (err) {
@@ -152,22 +167,22 @@ module.exports = {
           })
           res.end('404 Not Found')
         }
-        // } else if (parsed.pathname == '/manifest.json') {
-        //     res.writeHead(200, {
-        //         'content-type': 'application/json; charset=UTF-8',
-        //         // 'strict-transport-security': 'max-age=86400; includeSubDomains; preload'
-        //     });
-        //     fs.readFile('./assets/json/manifest.json', 'utf8', (err, data) => {
-        //         res.end(data);
-        //     });
-        // } else if (parsed.pathname == '/serviceWorker.js') {
-        //     res.writeHead(200, {
-        //         'content-type': 'text/javascript; charset=UTF-8',
-        //         // 'strict-transport-security': 'max-age=86400; includeSubDomains; preload'
-        //     });
-        //     fs.readFile('./assets/js/serviceWorker.js', 'utf8', (err, data) => {
-        //         res.end(data);
-        //     });
+        } else if (parsed.pathname == '/manifest.json') {
+            res.writeHead(200, {
+                'content-type': 'application/json; charset=UTF-8',
+                // 'strict-transport-security': 'max-age=86400; includeSubDomains; preload'
+            });
+            fs.readFile('./assets/json/manifest.json', 'utf8', (err, data) => {
+                res.end(data);
+            });
+        } else if (parsed.pathname == '/serviceWorker.js') {
+            res.writeHead(200, {
+                'content-type': 'text/javascript; charset=UTF-8',
+                // 'strict-transport-security': 'max-age=86400; includeSubDomains; preload'
+            });
+            fs.readFile('./assets/js/serviceWorker.js', 'utf8', (err, data) => {
+                res.end(data);
+            });
       } else {
         if (req.headers['user-agent'] && (req.headers['user-agent'].includes('MSIE') || req.headers['user-agent'].includes('rv:11.0'))) {
           res.writeHead(200, {
