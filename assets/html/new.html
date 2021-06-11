@@ -1,6 +1,5 @@
 <!DOCTYPE html>
-<html lang="ko" class="dark">
-
+<html lang="ko">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -30,16 +29,14 @@
 
 <body>
     <div id="header" class="z-10 text-black  transition-colors duration-200">
-        <div id="nav"
-            class="duration-200 shadow transition-colors fixed px-4 md:px-6 py-5 md:py-6 bg-white text-black dark:bg-gray-800 z-50 w-full h-16 md:h-20">
+        <nav class="duration-200 shadow transition-colors fixed px-4 md:px-6 py-5 md:py-6 bg-white text-black dark:bg-gray-800 z-50 w-full h-16 md:h-20">
             <div class="max-w-8xl m-auto md:px-2">
                 <div class="flex justify-between items-center">
                     <div class="flex items-center">
                         <img alt="logo" src="/static/image/webp/inticon.webp" height=30 width=30>
                         <div class=" pl-2 ">
                             <button class="spa-link-root focus:outline-none">
-                                <span
-                                    class="text-xl md:text-2xl font-semibold tracking-tight flex items-center flex-shrink-0  md:mr-6 text-black  dark:text-white spa-link-about">
+                                <span class="text-xl md:text-2xl font-semibold tracking-tight flex items-center flex-shrink-0  md:mr-6 text-black  dark:text-white spa-link-about">
                                     Verifier
                                 </span>
                             </button>
@@ -57,14 +54,40 @@
                             <button class="spa-link-dash focus:outline-none">대시보드</button>
                         </div>
                     </div>
-
                     <div class="block items-baseline">
                         <div class="flex flex-row">
-                            <div onclick="hamburger(window.showHamburger ? false : true)"
-                                class="text-black dark:text-white ml-2 sm:ml-4 h-6 w-6 block md:hidden">
-                                <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 512 512"
-                                    class="text-black dark:text-white ml-2 ml-0 h-6 w-6 block md:hidden" height="1em"
-                                    width="1em" xmlns="http://www.w3.org/2000/svg">
+                            <label class="cursor-pointer flex items-center justify-between">
+                                <span class="hidden dark:block w-10 mr-2 text-white">Dark</span>
+                                <span class="block dark:hidden w-10 mr-2 text-black ">Light</span>
+                                  <svg
+                                    class="hidden dark:block w-6 current-fill text-white"
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    viewBox="0 0 20 20"
+                                    fill="currentColor"
+                                  >
+                                    <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z" />
+                                  </svg>
+                                  <svg
+                                    class="block dark:hidden w-6 current-fill  text-yellow-400"
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    viewBox="0 0 20 20"
+                                    fill="currentColor"
+                                  >
+                                    <path
+                                      fillRule="evenodd"
+                                      d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z"
+                                      clipRule="evenodd"
+                                    />
+                                  </svg>
+                                <input
+                                  class="w-0 h-0 hidden"
+                                  type="checkbox"
+                                  onchange="darktoggle()"
+                                  checked="false"
+                                />
+                              </label>
+                            <div onclick="hamburger(window.showHamburger ? false : true)" class="text-black dark:text-white ml-2 sm:ml-4 h-6 w-6 block md:hidden">
+                                <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 512 512" class="text-black dark:text-white ml-2 ml-0 h-6 w-6 block md:hidden" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg">
                                     <path d="M32 96v64h448V96H32zm0 128v64h448v-64H32zm0 128v64h448v-64H32z"></path>
                                 </svg>
                             </div>
@@ -72,54 +95,44 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </nsv>
     </div>
-    <div class="fixed inset-y-0 right-0 z-40 mobile-nav md:hidden overflow-y-auto transition duration-200 transform dark:bg-foreground bg-white border-r-2 lg:translate-x-0 lg:static lg:inset-0 shadow-none ease-in translate-x-full"
-        id="hamburgermenu">
+    <div class="fixed inset-y-0 right-0 z-40 mobile-nav md:hidden overflow-y-auto transition duration-200 transform dark:bg-foreground bg-white border-r-2 lg:translate-x-0 lg:static lg:inset-0 shadow-none ease-in translate-x-full" id="hamburgermenu">
         <div class="md:invisible pt-20 h-3/4  md:h-0 font-medium text-white hover:text-gray-300 dark:hover:text-white ">
-            <div
-                class="px-4 h-12 space-y-1 sm:px-3 bg-white text-black dark:text-white dark:bg-foreground  block  py-2 spa-link-about mobile-nav-item">
+            <div class="px-4 h-12 space-y-1 sm:px-3 bg-white text-black dark:text-white dark:bg-foreground  block  py-2 spa-link-about mobile-nav-item">
                 <button class="focus:outline-none">소개</button>
             </div>
-            <div
-                class="px-4 h-12 space-y-1 sm:px-3 bg-white text-black dark:text-white dark:bg-foreground  block  py-2 spa-link-help mobile-nav-item">
+            <div class="px-4 h-12 space-y-1 sm:px-3 bg-white text-black dark:text-white dark:bg-foreground  block  py-2 spa-link-help mobile-nav-item">
                 <button class="focus:outline-none">지원</button>
             </div>
-            <div
-                class="px-4 h-12 space-y-1 sm:px-3 bg-white text-black dark:text-white dark:bg-foreground  block  py-2 spa-link-invite mobile-nav-item">
+            <div class="px-4 h-12 space-y-1 sm:px-3 bg-white text-black dark:text-white dark:bg-foreground  block  py-2 spa-link-invite mobile-nav-item">
                 <button class="focus:outline-none">초대하기</button>
             </div>
-            <div
-                class="px-4 h-12 space-y-1 sm:px-3 bg-white text-black dark:text-white dark:bg-foreground  block  py-2 spa-link-dash mobile-nav-item">
+            <div class="px-4 h-12 space-y-1 sm:px-3 bg-white text-black dark:text-white dark:bg-foreground  block  py-2 spa-link-dash mobile-nav-item">
                 <button class="focus:outline-none">대시보드</button>
             </div>
         </div>
     </div>
-    </div>
-    <main
-        class="pt-14 md:pt-20 text-gray-800 dark:text-gray-100 bg-white dark:bg-primary z-10 relative transition-colors duration-200">
+    <main class="pt-14 md:pt-20 text-gray-800 dark:text-gray-100 bg-white dark:bg-primary z-10 relative transition-colors duration-200">
         <div class="w-full transition-all relative z-0 hero flex sm:px-0 duration-200 " id="banner">
-            <img alt="light theme background"
-                class="hero-light absolute hero-image  w-full object-cover bg-cover bg-center"
-                src="/static/image/svg/light.svg" />
-            <img alt="dark theme background"
-                class="hero-dark  absolute hero-image w-full object-cover bg-cover bg-center "
-                src="/static/image/svg/mountain.svg" />
-
+            <img alt="light theme background" class="hero-light absolute hero-image  w-full object-cover bg-cover bg-center" src="/static/image/svg/light.svg" />
+            <img alt="dark theme background" class="hero-dark  absolute hero-image w-full object-cover bg-cover bg-center " src="/static/image/svg/mountain.svg" />
             <div class="inset-0 w-full  absolute z-0 bg-black opacity-10 "></div>
             <div class="mx-2 px-4 hero-text z-10 ">
                 <div class="text-5xl sm:text-6xl md:text-9xl font-bold text-white ">Verifier</div>
                 <div class="mt-3 md:mt-8 ">
-                    <button
-                        class="focus:outline-none bg-white text-gray-800 font-semibold text-sm md:text-lg py-2 px-2 md:py-3 md:px-4 uppercase text-semibold rounded-lg shadow sm:ml-5 spa-link-about">
+                    <button class="focus:outline-none bg-white text-gray-800 font-semibold text-sm md:text-lg py-2 px-2 md:py-3 md:px-4 uppercase text-semibold rounded-lg shadow sm:ml-5 spa-link-about">
                         about
                     </button>
                 </div>
             </div>
         </div>
-        <div class="transtition-colors duration-200  mx-auto rounded-2xl transform -translate-y-12 bg-white dark:bg-primary"
-            id="mount"></div>
+        <section class="transtition-colors duration-200  mx-auto rounded-2xl transform -translate-y-12 bg-white dark:bg-primary" id="mount"></section>
+        <footer class="p-6">
+            <hr class="pb-5">
+            <p class="opacity-70">Made by <a href="https://teamint.xyz">Team int</a></p>
+            <p class="opacity-70">View source on <a href="https://github.com/Team-int/verifier">GitHub</a></p>
+        </footer>
     </main>
 </body>
-
 </html>

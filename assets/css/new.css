@@ -131,3 +131,7 @@ li {
         transform: rotate(360deg);
     }
 }
+
+footer {
+    text-align: center;
+}

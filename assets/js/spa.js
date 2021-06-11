@@ -2,6 +2,18 @@ window.addEventListener('load', init)
 
 function init () {
   window.showHamburger = false
+  if (localStorage.getItem('dark')) {
+    if (localStorage.getItem('dark') == 'yes') {
+      window.dark = false
+    } else {
+      window.dark = true
+    }
+  } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+    window.dark = false
+  } else {
+    window.dark = true
+  }
+  darktoggle(true)
   if (getParam('state')) {
     if (getParam('state') == 'dash') {
       if (!getParam('code')) {
@@ -94,5 +106,17 @@ function hamburger(show) {
     document.querySelector('#hamburgermenu').classList.add('shadow-none')
     document.querySelector('#hamburgermenu').classList.add('ease-in')
     document.querySelector('#hamburgermenu').classList.add('translate-x-full')
+  }
+}
+
+function darktoggle(isInit = false) {
+  if (window.dark) {
+    document.querySelector('html').classList.remove('dark')
+    window.dark = false
+    if (!isInit) localStorage.setItem('dark', 'no')
+  } else {
+    document.querySelector('html').classList.add('dark')
+    window.dark = true
+    if (!isInit) localStorage.setItem('dark', 'yes')
   }
 }
