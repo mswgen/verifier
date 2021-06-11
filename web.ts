@@ -126,7 +126,7 @@ module.exports = {
               return
             }
             res.writeHead(200, {
-              'Content-Type': 'image/svg+xml',
+              'Content-Type': 'image/svg+xml; charset=UTF-8',
               // 'strict-transport-security': 'max-age=86400; includeSubDomains; preload'
             })
             res.end(data)
