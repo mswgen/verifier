@@ -10,7 +10,7 @@ let cacheFiles = [
   '/static/image/png/inticon-144.png',
   '/static/image/png/inticon-512.png'
 ]
-let name = 'chche-v1'
+let name = 'chche-v2'
 self.addEventListener('install', evt => {
   evt.waitUntil(
     caches.open(name).then(cache => {
