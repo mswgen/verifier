@@ -23,7 +23,7 @@ export default {
           res.end(JSON.stringify(r.data.filter((x:any) => client.guilds.cache.get(x.id) && client.guilds.cache.get(x.id)!.me!.hasPermission(['MANAGE_GUILD', 'MANAGE_ROLES']) && new Discord.Permissions(x.permissions).has('MANAGE_GUILD')).map((x:{id:string, name:string, icon:string}) => {
             return {
               id: x.id,
-              name: x.name,
+              name: x.name.replace(/</gi, '&lt;').replace(/>/gi, '&gt;'),
               icon: x.icon
             }
           })))
