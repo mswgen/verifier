@@ -3,6 +3,6 @@
 3. [ ] CSS 개선
 4. [ ] 커스터마이징 자유도 증가
 5. [ ] 인증시 관리자 알림 옵션
-6. [ ] Discord oauth 자동로그인
-7. [ ] PWA
+6. [x] ~~Discord oauth 자동로그인~~ 완료
+7. [x] ~~PWA~~ 완료
 8. [ ] Fallback 인증 추가
