@@ -11,7 +11,7 @@ let cacheFiles = [
   '/static/image/png/inticon-512.png',
   '/static/html/mounts/verified.html'
 ]
-let name = 'chche-v8'
+let name = 'chche-v9'
 self.addEventListener('install', evt => {
   evt.waitUntil(
     caches.open(name).then(cache => {

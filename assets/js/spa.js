@@ -21,7 +21,7 @@ function init () {
         return
       }
       fetchPage('/static/html/mounts/guildselect.html').then(() => {
-        fetch('/static/js/new-guildselect.js').then(r => r.text()).then(eval)
+        fetch('/static/js/guildselect.js').then(r => r.text()).then(eval)
       })
     } else if (getParam('state') == 'verify') {
       if (!getParam('token')) {
