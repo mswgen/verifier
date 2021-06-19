@@ -19,6 +19,10 @@ module.exports = {
         sans: ['-apple-system', '"Apple SD Gothic Neo"', 'Ubuntu', 'Helvetica', '"Noto Sans KR"', '"Malgun Gothic"', 'sans-serif'],
         serif: ['-apple-system', '"Apple SD Gothic Neo"', 'Ubuntu', 'Helvetica', '"Noto Sans KR"', '"Malgun Gothic"', 'sans-serif'],
         mono: ['-apple-system', '"Apple SD Gothic Neo"', 'Ubuntu', 'Helvetica', '"Noto Sans KR"', '"Malgun Gothic"', 'sans-serif']
+      },
+      outline: {
+        solidwhite: '1px solid white',
+        solidblack: '1px solid black'
       }
     }
   },

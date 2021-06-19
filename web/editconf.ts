@@ -97,7 +97,7 @@ export default {
                             prevConf.unverifiedRole = post.unverified
                         }
                     }
-                    if (post.msg) prevConf.msg = post.msg
+                    if (post.msg) prevConf.msg = post.msg.replace(/</gi, '&lt;').replace(/>/gi, '&gt;')
                     if (post.verifiedmsg) {
                         if (post.verifiedmsg == 'none') {
                             prevConf.verifiedMsg = null

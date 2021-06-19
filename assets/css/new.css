@@ -14,10 +14,6 @@
     margin-bottom: max(100px, 18vw);
 }
 
-.membercard {
-    max-width: 15rem;
-}
-
 .hero-image {
     height: 95%
 }
@@ -42,8 +38,6 @@ li {
     text-transform: uppercase;
     text-decoration: none;
     letter-spacing: 0.1em;
-
-
     position: relative;
 }
 
@@ -121,17 +115,98 @@ li {
     }
 }
 
-.infinite_rotating_logo {
-    animation: rotate_image 10s linear infinite;
-    transform-origin: 50% 50%;
+.guild-select-button {
+    outline: none;
 }
 
-@keyframes rotate_image {
-    100% {
-        transform: rotate(360deg);
-    }
+.guild-select-button:focus {
+    outline: 1px solid black;
 }
 
-footer {
-    text-align: center;
+.dark .guild-select-button:focus {
+    outline: 1px solid white;
+}
+
+.guild-select-button:focus:not(:focus-visible) {
+    outline: none;
+}
+
+.guild-select-button:focus-visible {
+    outline: 1px solid black;
+}
+
+.dark .guild-select-button:focus-visible {
+    outline: 1px solid white;
+}
+
+.navbutton {
+    outline: none;
+}
+
+.navbutton:focus {
+    outline: 1px solid black;
+}
+
+.dark .navbutton:focus {
+    outline: 1px solid white;
+}
+
+.navbutton:focus:not(:focus-visible) {
+    outline: none;
+}
+
+.navbutton:focus-visible {
+    outline: 1px solid black;
+}
+
+.dark .navbutton:focus-visible {
+    outline: 1px solid white;
+}
+
+.aboutbutton {
+    outline: none;
+}
+
+.aboutbutton:focus {
+    outline: 1px solid black;
+}
+
+.dark .aboutbutton:focus {
+    outline: 1px solid white;
+}
+
+.aboutbutton:focus:not(:focus-visible) {
+    outline: none;
+}
+
+.aboutbutton:focus-visible {
+    outline: 1px solid black;
+}
+
+.dark .aboutbutton:focus-visible {
+    outline: 1px solid white;
+}
+
+#verify {
+    outline: none;
+}
+
+#verify:focus {
+    outline: 1px solid black;
+}
+
+.dark #verify:focus {
+    outline: 1px solid white;
+}
+
+#verify:focus:not(:focus-visible) {
+    outline: none;
+}
+
+#verify:focus-visible {
+    outline: 1px solid black;
+}
+
+.dark #verify:focus-visible {
+    outline: 1px solid white;
 }

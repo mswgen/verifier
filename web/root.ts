@@ -10,8 +10,8 @@ export default {
       // 'strict-transport-security': 'max-age=86400; includeSubDomains; preload',
       'content-type': 'text/html; charset=UTF-8'
     })
-    fs.readFile('./assets/html/root.html', 'utf8', (err, data) => {
-      res.end(data.replace(/{redirect}/gi, process.env.REDIRECT as string).replace(/{client_id}/gi, client.user!.id))
+    fs.readFile('./assets/html/index.html', 'utf8', (err, data) => {
+      res.end(data)
     })
   }
 }

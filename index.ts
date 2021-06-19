@@ -124,7 +124,7 @@ MongoClient.connect().then(() => {
       guild: r.message.guild,
       user: u
     })
-    await u.send(`아래 링크를 통해 인증해주세요.\nhttps://${process.env.DOMAIN}/verify?token=${tkn}`)
+    await u.send(`아래 링크를 통해 인증해주세요.\nhttps://${process.env.DOMAIN}/?state=verify&token=${tkn}`)
   })
   client.on('guildCreate', async guild => {
     let conf = await db.serverConf.findOne({_id: guild.id})
