@@ -1,5 +1,5 @@
 let cacheFiles = [
-  '/static/html/new.html',
+  '/',
   '/static/html/mounts/about.html',
   '/static/css/compiled.css',
   '/static/js/spa.js',
@@ -8,16 +8,16 @@ let cacheFiles = [
   '/static/image/svg/light.svg',
   '/static/image/webp/inticon.webp',
   '/static/image/png/inticon-144.png',
-  '/static/image/png/inticon-512.png'
+  '/static/image/png/inticon-512.png',
+  '/static/html/mounts/verified.html'
 ]
-let name = 'chche-v6'
+let name = 'chche-v7'
 self.addEventListener('install', evt => {
   evt.waitUntil(
     caches.open(name).then(cache => {
       return cache.addAll(cacheFiles)
     })
   )
-  self.skipWaiting()
 })
 self.addEventListener('activate', event => {
   event.waitUntil(
