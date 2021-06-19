@@ -1,6 +1,6 @@
 /* eslint-disable no-undef */
 if (!window.accessToken) {
-  document.location.href = 'https://discord.com/api/oauth2/authorize?client_id=791863119843819520&redirect_uri=https%3A%2F%2Fverifier.teamint.xyz&2Fstatic%2Fhtml%2Fnew.html&response_type=code&scope=identify%20guilds'
+  document.location.href = 'https://discord.com/api/oauth2/authorize?client_id=791863119843819520&redirect_uri=https%3A%2F%2Fverifier.teamint.xyz&response_type=code&scope=identify%20guilds'
 }
 
 post('/api/getconf', window.guildInfo.id, {

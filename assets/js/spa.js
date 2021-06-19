@@ -17,7 +17,7 @@ function init () {
   if (getParam('state')) {
     if (getParam('state') == 'dash') {
       if (!getParam('code')) {
-        document.location.href = 'https://discord.com/api/oauth2/authorize?client_id=791863119843819520&redirect_uri=https%3A%2F%2Fverifier.teamint.xyz&2Fstatic%2Fhtml%2Fnew.html&response_type=code&scope=identify%20guilds'
+        document.location.href = 'https://discord.com/api/oauth2/authorize?client_id=791863119843819520&redirect_uri=https%3A%2F%2Fverifier.teamint.xyz&response_type=code&scope=identify%20guilds'
         return
       }
       fetchPage('/static/html/mounts/guildselect.html').then(() => {
@@ -57,7 +57,7 @@ function init () {
           fetch('/static/js/guildselect.js').then(r => r.text()).then(eval)
         })
       } else {
-        document.location.href = 'https://discord.com/api/oauth2/authorize?client_id=791863119843819520&redirect_uri=https%3A%2F%2Fverifier.teamint.xyz%2Fstatic%2Fhtml%2Fnew.html&response_type=code&scope=identify%20guilds&state=dash'
+        document.location.href = 'https://discord.com/api/oauth2/authorize?client_id=791863119843819520&redirect_uri=https%3A%2F%2Fverifier.teamint.xyz&response_type=code&scope=identify%20guilds&state=dash'
       }
     })
   }
