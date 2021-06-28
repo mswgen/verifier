@@ -7,10 +7,33 @@ post('/api/getconf', window.guildInfo.id, {
   Authorization: window.accessToken
 }, 'json').then(resp => {
   document.querySelector('#guildname').innerHTML = window.guildInfo.name
-  document.querySelector('#channelid').value = resp.channelid
+  for (let chs of resp.availableChannels) {
+    const elem = document.createElement('option')
+    elem.innerHTML = chs.name
+    elem.setAttribute('value', chs.id)
+    elem.setAttribute('id', `ch-${chs.id}`)
+    document.querySelector('#channelid').appendChild(elem)
+  }
   document.querySelector('#messageid').value = resp.messageid
-  document.querySelector('#unverified').value = resp.unverified
-  document.querySelector('#verified').value = resp.verified
+  for (let chs of resp.availableRoles) {
+    const elem = document.createElement('option')
+    elem.innerHTML = chs.name
+    elem.setAttribute('value', chs.id)
+    
+    elem.setAttribute('id', `verified-${chs.id}`)
+    document.querySelector('#verified').appendChild(elem)
+  }
+  for (let chs of resp.availableRoles) {
+    const elem = document.createElement('option')
+    elem.innerHTML = chs.name
+    elem.setAttribute('value', chs.id)
+    elem.setAttribute('id', `unverified-${chs.id}`)
+    document.querySelector('#unverified').appendChild(elem)
+  }
+  if (document.querySelector(`#ch-${resp.channelid}`)) document.querySelector(`#ch-${resp.channelid}`).setAttribute('selected', 'true')
+  document.querySelector('#messageid').value = resp.messageid
+  if (document.querySelector(`#verified-${resp.verified}`)) document.querySelector(`#verified-${resp.verified}`).setAttribute('selected', 'true')
+  if (document.querySelector(`#unverified-${resp.unverified}`)) document.querySelector(`#unverified-${resp.unverified}`).setAttribute('selected', 'true')
   document.querySelector('#msg').value = resp.msg
   document.querySelector('#verifiedmsg').value = resp.verifiedmsg
   document.querySelector('#channelid').addEventListener('change', () => {

@@ -1,6 +1,4 @@
-import qs from 'querystring'
 import axios from 'axios'
-import fs from 'fs'
 import type Discord from 'discord.js'
 import type http from 'http'
 import type mongodb from 'mongodb'

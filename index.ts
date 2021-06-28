@@ -1,5 +1,5 @@
 import Discord from 'discord.js'
-import fs from 'fs'
+import fs from 'fs/promises'
 import mongodb from 'mongodb'
 import dotenv from 'dotenv'
 dotenv.config()
@@ -33,7 +33,7 @@ MongoClient.connect().then(() => {
   }
   const ascii = require('ascii-table')
   const table = new ascii().setHeading('Path', 'Load Status')
-  fs.readdir('./dist/web/', (err: any, list: Array<string>) => {
+  fs.readdir('./dist/web/').then(list => {
     for (let file of list.filter(x => x.endsWith(('.js')))) {
       try {
         let pull = require(`./web/${file}`).default
@@ -103,7 +103,7 @@ MongoClient.connect().then(() => {
           break
       }
     }, 5000)
-    require('./web.js').start(client, db)
+    require('./web.js').default.start(client, db)
   })
   client.on('guildMemberAdd', async member => {
     if (member.partial) await member.fetch()

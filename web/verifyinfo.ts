@@ -1,4 +1,3 @@
-import fs from 'fs'
 import type Discord from 'discord.js'
 import type http from 'http'
 import type url from 'url'

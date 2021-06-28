@@ -115,98 +115,26 @@ li {
     }
 }
 
-.guild-select-button {
+.a11y-outline {
     outline: none;
 }
 
-.guild-select-button:focus {
+.a11y-outline:focus {
     outline: 1px solid black;
 }
 
-.dark .guild-select-button:focus {
+.dark .a11y-outline:focus {
     outline: 1px solid white;
 }
 
-.guild-select-button:focus:not(:focus-visible) {
+.a11y-outline:focus:not(:focus-visible) {
     outline: none;
 }
 
-.guild-select-button:focus-visible {
+.a11y-outline:focus-visible {
     outline: 1px solid black;
 }
 
-.dark .guild-select-button:focus-visible {
-    outline: 1px solid white;
-}
-
-.navbutton {
-    outline: none;
-}
-
-.navbutton:focus {
-    outline: 1px solid black;
-}
-
-.dark .navbutton:focus {
-    outline: 1px solid white;
-}
-
-.navbutton:focus:not(:focus-visible) {
-    outline: none;
-}
-
-.navbutton:focus-visible {
-    outline: 1px solid black;
-}
-
-.dark .navbutton:focus-visible {
-    outline: 1px solid white;
-}
-
-.aboutbutton {
-    outline: none;
-}
-
-.aboutbutton:focus {
-    outline: 1px solid black;
-}
-
-.dark .aboutbutton:focus {
-    outline: 1px solid white;
-}
-
-.aboutbutton:focus:not(:focus-visible) {
-    outline: none;
-}
-
-.aboutbutton:focus-visible {
-    outline: 1px solid black;
-}
-
-.dark .aboutbutton:focus-visible {
-    outline: 1px solid white;
-}
-
-#verify {
-    outline: none;
-}
-
-#verify:focus {
-    outline: 1px solid black;
-}
-
-.dark #verify:focus {
-    outline: 1px solid white;
-}
-
-#verify:focus:not(:focus-visible) {
-    outline: none;
-}
-
-#verify:focus-visible {
-    outline: 1px solid black;
-}
-
-.dark #verify:focus-visible {
+.dark .a11y-outline:focus-visible {
     outline: 1px solid white;
 }

@@ -18,7 +18,7 @@ if (localStorage.getItem('discord')) {
 function displayGuilds(list) {
   for (let x of list) {
     const element = document.createElement('button')
-    element.setAttribute('class', 'flex flex-row p-10 m-2 row-auto rounded-2x1 border-0 bg-card dark:bg-black guild-select-button')
+    element.setAttribute('class', 'flex flex-row p-10 m-2 row-auto rounded-2x1 border-0 bg-card dark:bg-black guild-select-button a11y-outline')
     const childElement = document.createElement('div')
     childElement.setAttribute('class', 'text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-br from-yellow-400 via-red-400 to-pink-500 grid grid-cols-2 grid-rows-1 my-auto')
     element.appendChild(childElement)

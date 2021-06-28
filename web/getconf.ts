@@ -31,7 +31,16 @@ export default {
             unverified: dbVal.unverifiedRole,
             verified: dbVal.verifiedRole,
             msg: dbVal.msg,
-            verifiedmsg: dbVal.verifiedMsg
+            verifiedmsg: dbVal.verifiedMsg,
+            availableChannels: client.guilds.cache.get(post)?.channels.cache.filter(x => x.type == 'text' && x.permissionsFor(client.user!)!.has(['VIEW_CHANNEL', 'ADD_REACTIONS', 'MANAGE_MESSAGES', 'READ_MESSAGE_HISTORY'])).map(x => {
+              return {name: x.name, id: x.id}
+            }),
+            availableRoles: client.guilds.cache.get(post)?.roles.cache.filter(x =>  x.position < x.guild.me!.roles.highest.position && x.id != post).map(x => {
+              return {
+                id: x.id,
+                name: x.name
+              }
+            })
           }))
         })
       } else {
