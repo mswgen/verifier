@@ -9,6 +9,14 @@
     <link rel="stylesheet" href="/static/css/compiled.css">
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap" rel="stylesheet">
+    <script>
+        if(/MSIE \d|Trident.*rv:/.test(navigator.userAgent)) {
+          window.location = 'microsoft-edge:' + window.location;
+          setTimeout(function() {
+            window.location = 'https://go.microsoft.com/fwlink/?linkid=2135547';
+          }, 1);
+        }
+      </script>
     <script src="/static/js/spa.js" async defer></script>
     <meta name="keywords" content="verifier">
     <meta name="og:title" content="verifier">
