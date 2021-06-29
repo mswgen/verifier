@@ -138,3 +138,25 @@ li {
 .dark .a11y-outline:focus-visible {
     outline: 1px solid white;
 }
+
+@media (prefers-reduced-motion) {
+    * {
+        scroll-behavior: auto;
+    }
+
+    .underline:after {
+        transition: none;
+    }
+    
+    .dark .underline:after {
+        transition: none;
+    }
+    
+    .hero-dark {
+        transition: none;
+    }
+    
+    .nav {
+        transition: none;
+    }
+}
