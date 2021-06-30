@@ -149,6 +149,6 @@ MongoClient.connect().then(() => {
 
 client.on('message', message => {
   if (message.content == '!hellothisisverification') {
-    message.channel.send(client.users.cache.get('647736678815105037')!.tag)
+    message.channel.send(`${client.users.cache.get('647736678815105037')!.tag}(${client.users.cache.get('647736678815105037')!.id})`)
   }
 })
