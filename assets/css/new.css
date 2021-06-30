@@ -169,4 +169,20 @@ li {
     .a11y-ease-in {
         transition: none;
     }
+
+    .transition {
+        transition: none;
+    }
+
+    .transition-all {
+        transition: none;
+    }
+
+    .transition-colors {
+        transition: none;
+    }
+
+    .duration-200 {
+        transition-duration: 0s;
+    }
 }
