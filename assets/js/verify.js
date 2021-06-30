@@ -1,8 +1,8 @@
 // eslint-disable-next-line no-unused-vars
-function recaptchaCallback(token) {
+function hcaptchaCallback(token) {
   // eslint-disable-next-line no-undef
   post('/api/verify', undefined, {
-    recaptcha: token,
+    hcaptcha: token,
     // eslint-disable-next-line no-undef
     token: getParam('token')
   }, 'text').then(stat => {
@@ -28,12 +28,12 @@ post('/api/verifyinfo', getParam('token'), undefined, 'json').then(resp => {
     // eslint-disable-next-line no-undef
     grecaptcha.execute()
   })
-  const recaptchaInject = document.createElement('script')
-  recaptchaInject.setAttribute('src', 'https://www.google.com/recaptcha/api.js?onload=recaptchaLoad')
-  recaptchaInject.setAttribute('type', 'text/javascript')
-  recaptchaInject.setAttribute('async', 'true')
-  recaptchaInject.setAttribute('defer', 'true')
-  document.body.appendChild(recaptchaInject)
+  const hcaptchaInject = document.createElement('script')
+  hcaptchaInject.setAttribute('src', 'https://hcaptcha.com/1/api.js?onload=recaptchaLoad')
+  hcaptchaInject.setAttribute('type', 'text/javascript')
+  hcaptchaInject.setAttribute('async', 'true')
+  hcaptchaInject.setAttribute('defer', 'true')
+  document.body.appendChild(hcaptchaInject)
 })
 
 // eslint-disable-next-line no-unused-vars

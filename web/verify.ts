@@ -11,11 +11,11 @@ export default {
             res.writeHead(400)
             res.end('Invalid token')
         } else {
-            axios.get(`https://www.google.com/recaptcha/api/siteverify?secret=${process.env.RECAPTCHA}&response=${req.headers.recaptcha}`).then(async recaptchaRes => {
-                if (recaptchaRes.data.success != true) {
-                    console.log(recaptchaRes.data)
+            axios.get(`https://hcaptcha.com/siteverify?secret=${process.env.HCAPTCHA}&response=${req.headers.hcaptcha}&remoteip=${req.headers['cf-connecting-ip'] || req.headers['x-forwarded-for']}&sitekey=87b3c11a-f500-4c15-9fb2-1de943d2ac93`).then(async hcaptchaRes => {
+                if (hcaptchaRes.data.success != true) {
+                    console.log(hcaptchaRes.data)
                     res.writeHead(400)
-                    res.end('reCAPTCHA authentication failed')
+                    res.end('hCaptcha authentication failed')
                 } else {
                     let conf = await db.serverConf.findOne({ _id: (client as any).verifyQueue.get(req.headers.token).guild.id })
                     if (conf.verifiedMsg) {
