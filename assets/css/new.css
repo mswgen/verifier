@@ -139,6 +139,12 @@ li {
     outline: 1px solid white;
 }
 
+.a11y-ease-in {
+    transition-property: background-color, border-color, color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter;
+    transition-duration: 200ms;
+    transition-timing-function: cubic-bezier(0.4, 0, 1, 1);
+}
+
 @media (prefers-reduced-motion) {
     * {
         scroll-behavior: auto;
@@ -157,6 +163,10 @@ li {
     }
     
     .nav {
+        transition: none;
+    }
+
+    .a11y-ease-in {
         transition: none;
     }
 }
