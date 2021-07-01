@@ -89,7 +89,7 @@ function getParam(sname) {
 async function fetchPage(path, element) {
   await fetch(path).then(async r => await r.text()).then(resp => {
     document.querySelector(element || '#mount').innerHTML = resp
-    window.scrollTo(0, 0)
+    document.querySelector<Element>(element || '#mount').scrollIntoView()
   })
 }
 
