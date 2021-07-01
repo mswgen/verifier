@@ -25,7 +25,7 @@ function init () {
       })
     } else if (getParam('state') == 'verify') {
       if (!getParam('token')) {
-        fetchPage('/static/html/mounts/about.html')
+        fetchPage('/static/html/mounts/about.html', '#mount', false)
       } else {
         fetchPage('/static/html/mounts/verify.html').then(() => {
           fetch('/static/js/verify.js').then(r => r.text()).then(eval)
@@ -86,10 +86,10 @@ function getParam(sname) {
   return sval
 }
 
-async function fetchPage(path, element) {
+async function fetchPage(path, element, scroll = true) {
   await fetch(path).then(async r => await r.text()).then(resp => {
     document.querySelector(element || '#mount').innerHTML = resp
-    document.querySelector(element || '#mount').scrollIntoView()
+    if (scroll) document.querySelector(element || '#mount').scrollIntoView()
   })
 }
 
