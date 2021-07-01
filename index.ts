@@ -136,7 +136,7 @@ MongoClient.connect().then(() => {
       channelId: undefined,
       messageId: undefined,
       msg: '{서버.이름} 규칙에 동의하신다면 아래 버튼을 눌러주세요.',
-      verifiedMsg: '인증을 완료했어요!'
+      verifiedMsg: null
     })
   })
   client.on('guildDelete', async guild => {
