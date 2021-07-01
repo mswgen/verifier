@@ -95,6 +95,7 @@ async function fetchPage(path, element, scroll = true) {
   await fetch(path).then(async r => await r.text()).then(resp => {
     document.querySelector(element || '#mount').innerHTML = resp
     if (scroll) document.querySelector(element || '#mount').scrollIntoView()
+    else window.scrollTo(0, 0)
   })
 }
 
