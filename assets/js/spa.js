@@ -33,7 +33,7 @@ function init () {
       }
     }
   } else {
-    fetchPage('/static/html/mounts/about.html')
+    fetchPage('/static/html/mounts/about.html', '#mount', false)
   }
   for (let element of Array.from(document.querySelectorAll('.spa-link-about'))) {
     element.addEventListener('click', () => {
