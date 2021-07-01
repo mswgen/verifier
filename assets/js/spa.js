@@ -40,6 +40,11 @@ function init () {
       fetchPage('/static/html/mounts/about.html')
     })
   }
+  for (let element of Array.from(document.querySelectorAll('.spa-link-logo'))) {
+    element.addEventListener('click', () => {
+      fetchPage('/static/html/mounts/about.html', '#mount', false)
+    })
+  }
   for (let element of Array.from(document.querySelectorAll('.spa-link-help'))) {
     element.addEventListener('click', () => {
       document.location.href = 'https://discord.gg/nKaM6RrN92'
