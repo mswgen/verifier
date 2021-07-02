@@ -2,6 +2,7 @@ import Discord from 'discord.js'
 import fs from 'fs/promises'
 import mongodb from 'mongodb'
 import dotenv from 'dotenv'
+import axios from 'axios'
 dotenv.config()
 const client = new Discord.Client({
   partials: ['MESSAGE', 'REACTION', 'GUILD_MEMBER', 'USER'],
@@ -104,6 +105,16 @@ MongoClient.connect().then(() => {
       }
     }, 5000)
     require('./web.js').default.start(client, db)
+    setInterval(() => {
+      axios.post(`https://koreanbots.dev/api/v2/bots/${client.user!.id}/stats`, JSON.stringify({
+        servers: client.guilds.cache.size
+      }), {
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': process.env.KOREANBOTS
+        }
+      }).then(() => {}).catch(() => {})
+    }, 180000)
   })
   client.on('guildMemberAdd', async member => {
     if (member.partial) await member.fetch()
