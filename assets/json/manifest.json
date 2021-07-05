@@ -61,5 +61,22 @@
             "sizes": "512x512",
             "purpose": "maskable"
         }
+    ],
+    "shortcuts": [
+        {
+            "name": "대시보드",
+            "description": "웹 대시보드 열기",
+            "url": "/?state=dash",
+            "icons": [
+                {
+                    "src": "/static/image/png/dashimg-96.png",
+                    "sizes": "96x96"
+                },
+                {
+                    "src": "/static/image/png/dashimg-192.png",
+                    "sizes": "192x192"
+                }
+            ]
+        }
     ]
 }

@@ -1,15 +1,31 @@
 /* eslint-disable no-undef */
 if (localStorage.getItem('discord')) {
   post('/api/tokenrefresh', localStorage.getItem('discord'), undefined, 'json').then(resp => {
+    if (resp.stat == 'offline') {
+      return fetchPage('/static/html/mounts/offline.html')
+    }
     localStorage.setItem('discord', resp.refresh)
     window.accessToken = resp.access
-    post('/api/getguilds', window.accessToken, undefined, 'json').then(displayGuilds)
+    post('/api/getguilds', window.accessToken, undefined, 'json').then(r => {
+      if (r.stat == 'offline') {
+        return fetchPage('/static/html/mounts/offline.html')
+      }
+      return displayGuilds(r)
+    })
   })
 } else if (getParam('code')) {
   post('/api/gettoken', getParam('code'), undefined, 'json').then(resp => {
+    if (resp.stat == 'offline') {
+      return fetchPage('/static/html/mounts/offline.html')
+    }
     localStorage.setItem('discord', resp.refresh)
     window.accessToken = resp.access
-    post('/api/getguilds', window.accessToken, undefined, 'json').then(displayGuilds)
+    post('/api/getguilds', window.accessToken, undefined, 'json').then(r => {
+      if (r.stat == 'offline') {
+        return fetchPage('/static/html/mounts/offline.html')
+      }
+      return displayGuilds(r)
+    })
   })
 } else {
   fetchPage('/static/html/mounts/about.html')

@@ -6,6 +6,9 @@ if (!window.accessToken) {
 post('/api/getconf', window.guildInfo.id, {
   Authorization: window.accessToken
 }, 'json').then(resp => {
+  if (resp.stat == 'offline') {
+    return fetchPage('/static/html/mounts/offline.html')
+  }
   document.querySelector('#guildname').innerHTML = window.guildInfo.name
   for (let chs of resp.availableChannels) {
     const elem = document.createElement('option')
@@ -19,7 +22,7 @@ post('/api/getconf', window.guildInfo.id, {
     const elem = document.createElement('option')
     elem.innerHTML = chs.name
     elem.setAttribute('value', chs.id)
-    
+
     elem.setAttribute('id', `verified-${chs.id}`)
     document.querySelector('#verified').appendChild(elem)
   }
@@ -43,11 +46,17 @@ post('/api/getconf', window.guildInfo.id, {
     }), {
       Authorization: window.accessToken
     }, 'text').then(r => {
-      if (r == 'error') {
-        alert('이 서버의 설정을 바꿀 수 없어요.')
-        fetchPage('/static/html/mounts/guildselect.html')
-      } else if (r != 'ok') {
-        alert(r)
+      try {
+        if (JSON.parse(r).stat == 'offline') {
+          return alert('지금 오프라인 상태에요. 인터넷에 연결한 다음 다시 시도해주세요.')
+        }
+      } catch (e) {
+        if (r == 'error') {
+          alert('이 서버의 설정을 바꿀 수 없어요.')
+          fetchPage('/static/html/mounts/guildselect.html')
+        } else if (r != 'ok') {
+          alert(r)
+        }
       }
     })
   })
@@ -59,11 +68,17 @@ post('/api/getconf', window.guildInfo.id, {
     }), {
       Authorization: window.accessToken
     }, 'text').then(r => {
-      if (r == 'error') {
-        alert('이 서버의 설정을 바꿀 수 없어요.')
-        fetchPage('/static/html/mounts/guildselect.html')
-      } else if (r != 'ok') {
-        alert(r)
+      try {
+        if (JSON.parse(r).stat == 'offline') {
+          return alert('지금 오프라인 상태에요. 인터넷에 연결한 다음 다시 시도해주세요.')
+        }
+      } catch (e) {
+        if (r == 'error') {
+          alert('이 서버의 설정을 바꿀 수 없어요.')
+          fetchPage('/static/html/mounts/guildselect.html')
+        } else if (r != 'ok') {
+          alert(r)
+        }
       }
     })
   })
@@ -74,11 +89,17 @@ post('/api/getconf', window.guildInfo.id, {
     }), {
       Authorization: window.accessToken
     }, 'text').then(r => {
-      if (r == 'error') {
-        alert('이 서버의 설정을 바꿀 수 없어요.')
-        fetchPage('/static/html/mounts/guildselect.html')
-      } else if (r != 'ok') {
-        alert(r)
+      try {
+        if (JSON.parse(r).stat == 'offline') {
+          return alert('지금 오프라인 상태에요. 인터넷에 연결한 다음 다시 시도해주세요.')
+        }
+      } catch (e) {
+        if (r == 'error') {
+          alert('이 서버의 설정을 바꿀 수 없어요.')
+          fetchPage('/static/html/mounts/guildselect.html')
+        } else if (r != 'ok') {
+          alert(r)
+        }
       }
     })
   })
@@ -89,11 +110,17 @@ post('/api/getconf', window.guildInfo.id, {
     }), {
       Authorization: window.accessToken
     }, 'text').then(r => {
-      if (r == 'error') {
-        alert('이 서버의 설정을 바꿀 수 없어요.')
-        fetchPage('/static/html/mounts/guildselect.html')
-      } else if (r != 'ok') {
-        alert(r)
+      try {
+        if (JSON.parse(r).stat == 'offline') {
+          return alert('지금 오프라인 상태에요. 인터넷에 연결한 다음 다시 시도해주세요.')
+        }
+      } catch (e) {
+        if (r == 'error') {
+          alert('이 서버의 설정을 바꿀 수 없어요.')
+          fetchPage('/static/html/mounts/guildselect.html')
+        } else if (r != 'ok') {
+          alert(r)
+        }
       }
     })
   })
@@ -104,26 +131,38 @@ post('/api/getconf', window.guildInfo.id, {
     }), {
       Authorization: window.accessToken
     }, 'text').then(r => {
-      if (r == 'error') {
-        alert('이 서버의 설정을 바꿀 수 없어요.')
-        fetchPage('/static/html/mounts/guildselect.html')
-      } else if (r != 'ok') {
-        alert(r)
+      try {
+        if (JSON.parse(r).stat == 'offline') {
+          return alert('지금 오프라인 상태에요. 인터넷에 연결한 다음 다시 시도해주세요.')
+        }
+      } catch (e) {
+        if (r == 'error') {
+          alert('이 서버의 설정을 바꿀 수 없어요.')
+          fetchPage('/static/html/mounts/guildselect.html')
+        } else if (r != 'ok') {
+          alert(r)
+        }
       }
     })
   })
   document.querySelector('#msg').addEventListener('change', () => {
     post('/api/editconf', JSON.stringify({
       guildid: window.guildInfo.id,
-      msg: document.querySelector('#msg').value 
+      msg: document.querySelector('#msg').value
     }), {
       Authorization: window.accessToken
     }, 'text').then(r => {
-      if (r == 'error') {
-        alert('이 서버의 설정을 바꿀 수 없어요.')
-        fetchPage('/static/html/mounts/guildselect.html')
-      } else if (r != 'ok') {
-        alert(r)
+      try {
+        if (JSON.parse(r).stat == 'offline') {
+          return alert('지금 오프라인 상태에요. 인터넷에 연결한 다음 다시 시도해주세요.')
+        }
+      } catch (e) {
+        if (r == 'error') {
+          alert('이 서버의 설정을 바꿀 수 없어요.')
+          fetchPage('/static/html/mounts/guildselect.html')
+        } else if (r != 'ok') {
+          alert(r)
+        }
       }
     })
   })

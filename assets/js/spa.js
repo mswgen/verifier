@@ -16,7 +16,7 @@ function init () {
   darktoggle(true)
   if (getParam('state')) {
     if (getParam('state') == 'dash') {
-      if (!getParam('code')) {
+      if (!getParam('code') && !localStorage.getItem('discord')) {
         document.location.href = 'https://discord.com/api/oauth2/authorize?client_id=791863119843819520&redirect_uri=https%3A%2F%2Fverifier.teamint.xyz&response_type=code&scope=identify%20guilds'
         return
       }

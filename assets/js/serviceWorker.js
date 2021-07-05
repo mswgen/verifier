@@ -9,9 +9,18 @@ let cacheFiles = [
   '/static/image/webp/inticon.webp',
   '/static/image/png/inticon-144.png',
   '/static/image/png/inticon-512.png',
-  '/static/html/mounts/verified.html'
+  '/static/html/mounts/verified.html',
+  '/static/html/mounts/guildselect.html',
+  '/static/html/mounts/dash.html',
+  '/static/html/mounts/verify.html',
+  '/static/js/guildselect.js',
+  '/static/js/verify.js',
+  '/static/js/dash.js',
+  '/static/json/offline.json',
+  '/static/image/png/dashimg-96.png',
+  '/static/image/png/dashimg-192.png'
 ]
-let name = 'chche-v13'
+let name = 'chche-v14'
 self.addEventListener('install', evt => {
   evt.waitUntil(
     caches.open(name).then(cache => {
@@ -35,8 +44,8 @@ self.addEventListener('activate', event => {
 self.addEventListener('fetch', event => {
   event.respondWith(
     caches.match(event.request)
-      .then(response => {
-        if (response) return response
+      .then(cacheResponse => {
+        if (cacheResponse) return cacheResponse
         let fetchRequest = event.request.clone()
         return fetch(fetchRequest).then(response => {
           if (!response || response.status !== 200 || response.type !== 'basic') return response
@@ -48,6 +57,11 @@ self.addEventListener('fetch', event => {
             })
           return response
         }).catch(() => {
+          if (event.request.url.startsWith('/api/')) {
+            return caches.open(name).then(async cache => {
+              return await cache.match('/static/json/offline.json')
+            })
+          }
           return caches.open(name).then(async cache => {
             return await cache.match('/static/html/mounts/offline.html')
           })
