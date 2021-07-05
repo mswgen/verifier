@@ -1,5 +1,3 @@
-const { URL } = require("url")
-
 let cacheFiles = [
   '/',
   '/static/html/mounts/about.html',
