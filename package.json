@@ -8,8 +8,7 @@
     "axios": "0.21.1",
     "discord.js": "12.5.1",
     "dotenv": "8.2.0",
-    "mongodb": "^3.6.9",
-    "socket.io": "3.0.4"
+    "mongodb": "^3.6.9"
   },
   "main": "dist/index.js",
   "scripts": {
