@@ -82,24 +82,24 @@
                                 <span class="block dark:hidden w-10 mr-2 text-black ">Light</span>
                                 <svg class="hidden dark:block w-6 current-fill text-white"
                                     xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
-                                    <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z" />
+                                    <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z">
                                 </svg>
                                 <svg class="block dark:hidden w-6 current-fill  text-yellow-400"
                                     xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
                                     <path fillRule="evenodd"
                                         d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z"
-                                        clipRule="evenodd" />
+                                        clipRule="evenodd">
                                 </svg>
-                                <input class="w-0 h-0 hidden" type="checkbox" onchange="darktoggle()" checked="false" />
+                                <input class="w-0 h-0 hidden" type="checkbox" onchange="darktoggle()" checked="false">
                             </label>
-                            <div onclick="hamburger(window.showHamburger ? false : true)"
+                            <button onclick="hamburger(window.showHamburger ? false : true)"
                                 class="text-black dark:text-white ml-2 sm:ml-4 h-6 w-6 block md:hidden">
                                 <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 512 512"
                                     class="text-black dark:text-white h-6 w-6 block md:hidden" height="1em" width="1em"
                                     xmlns="http://www.w3.org/2000/svg">
                                     <path d="M32 96v64h448V96H32zm0 128v64h448v-64H32zm0 128v64h448v-64H32z"></path>
                                 </svg>
-                            </div>
+                            </button>
                         </div>
                     </div>
                 </div>
@@ -130,15 +130,15 @@
     <main
         class="pt-14 md:pt-20 text-gray-800 dark:text-gray-100 bg-white dark:bg-primary z-10 relative transition-colors duration-200">
         <div class="w-full transition-all relative z-0 hero flex sm:px-0 duration-200 " id="banner">
-            <img alt="light theme background"
+            <img alt=""
                 class="hero-light absolute hero-image  w-full object-cover bg-cover bg-center"
-                src="/static/image/svg/light.svg" />
-            <img alt="dark theme background"
+                src="/static/image/svg/light.svg">
+            <img alt=""
                 class="hero-dark  absolute hero-image w-full object-cover bg-cover bg-center "
-                src="/static/image/svg/mountain.svg" />
+                src="/static/image/svg/mountain.svg">
             <div class="inset-0 w-full  absolute z-0 bg-black opacity-10 "></div>
             <div class="mx-2 px-4 hero-text z-10 ">
-                <div class="text-5xl sm:text-6xl md:text-9xl font-bold text-white ">Verifier</div>
+                <h1 class="text-5xl sm:text-6xl md:text-9xl font-bold text-white ">Verifier</h1>
                 <div class="mt-3 md:mt-8 ">
                     <button
                         class="aboutbutton bg-white text-gray-800 font-semibold text-sm md:text-lg py-2 px-2 md:py-3 md:px-4 uppercase text-semibold rounded-lg shadow sm:ml-5 spa-link-about">

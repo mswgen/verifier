@@ -4,9 +4,11 @@
     <script src="/static/js/new-dash.js" async defer></script>
     <div class="flex flex-row p-10 m-2 row-auto rounded-2xl border-0 bg-card dark:bg-black">
       <div class="inline lg:inline text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-br from-yellow-400 via-red-400 to-pink-500">
-        인증 메세지가 <br />
-        있는 <br />
-        채널 <br /><br />
+        <label for="channelid">
+          인증 메세지가 <br>
+          있는 <br>
+          채널 <br><br>
+        </label>
         <select id="channelid" class="w-full bg-gray-300 dark:bg-gray-900 text-black dark:text-white text-2xl a11y-outline">
           <option value="none">없음</option>
         </select>
@@ -14,15 +16,19 @@
     </div>
     <div class="flex flex-row p-10 m-2 row-auto rounded-2xl border-0 bg-card dark:bg-black">
       <div class="inline lg:inline text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-br from-green-400 via-blue-400 to-blue-500">
-        인증 메세지의 <br />
-        ID <br /><br />
+        <label for="messageid">
+          인증 메세지의 <br>
+          ID <br><br>
+        </label>
         <input type="text" id="messageid" class="w-full bg-gray-300 dark:bg-gray-900 text-black dark:text-white text-2xl a11y-outline">
       </div>
     </div>
     <div class="flex flex-row p-10 m-2 row-auto rounded-2xl border-0 bg-card dark:bg-black">
       <div class="inline lg:inline text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-br from-yellow-400 via-red-400 to-pink-500">
-        미인증 <br />
-        역할 <br /><br />
+        <label for="unverified">
+          미인증 <br>
+          역할 <br><br>
+        </label>
         <select id="unverified" class="w-full bg-gray-300 dark:bg-gray-900 text-black dark:text-white text-2xl a11y-outline">
           <option value="none">없음</option>
         </select>
@@ -30,8 +36,10 @@
     </div>
     <div class="flex flex-row p-10 m-2 row-auto rounded-2xl border-0 bg-card dark:bg-black">
       <div class="inline lg:inline text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-br from-green-400 via-blue-400 to-blue-500">
-        인증 <br />
-        완료 역할 <br /><br />
+        <label for="verified">
+          인증 <br>
+          완료 역할 <br><br>
+        </label>
         <select id="verified" class="w-full bg-gray-300 dark:bg-gray-900 text-black dark:text-white text-2xl a11y-outline">
           <option value="none">없음</option>
         </select>
@@ -39,16 +47,20 @@
     </div>
     <div class="flex flex-row p-10 m-2 row-auto rounded-2xl border-0 bg-card dark:bg-black">
       <div class="inline lg:inline text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-br from-yellow-400 via-red-400 to-pink-500">
-        인증 <br />
-        화면에 표시할 <br />
-        메세지 <br /><br />
+        <label for="msg">
+          인증 <br>
+          화면에 표시할 <br>
+          메세지 <br><br>
+        </label>
         <textarea id="msg" class="w-full bg-gray-300 dark:bg-gray-900 text-black dark:text-white text-2xl a11y-outline resize-none"></textarea>
       </div>
     </div>
     <div class="flex flex-row p-10 m-2 row-auto rounded-2xl border-0 bg-card dark:bg-black">
       <div class="inline lg:inline text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-br from-green-400 via-blue-400 to-blue-500">
-        인증 완료 <br />
-        메세지 <br /><br />
+        <label for="verifiedmsg">
+          인증 완료 <br>
+          메세지 <br><br>
+        </label>
         <textarea id="verifiedmsg" class="w-full bg-gray-300 dark:bg-gray-900 text-black dark:text-white text-2xl a11y-outline resize-none"></textarea>
       </div>
     </div>

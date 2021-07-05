@@ -17,6 +17,7 @@ post('/api/getconf', window.guildInfo.id, {
     elem.setAttribute('id', `ch-${chs.id}`)
     document.querySelector('#channelid').appendChild(elem)
   }
+  document.querySelector('#channelid').children[0].remove()
   document.querySelector('#messageid').value = resp.messageid
   for (let chs of resp.availableRoles) {
     const elem = document.createElement('option')
