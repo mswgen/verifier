@@ -35,6 +35,10 @@ function init () {
   } else {
     fetchPage('/static/html/mounts/about.html', '#mount', false)
   }
+  document.querySelector('#skip2main').addEventListener('click', () => {
+    document.querySelector('.aboutbutton').focus()
+    document.querySelector('#mount').scrollIntoView()
+  })
   for (let element of Array.from(document.querySelectorAll('.spa-link-about'))) {
     element.addEventListener('click', () => {
       fetchPage('/static/html/mounts/about.html')
