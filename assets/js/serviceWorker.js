@@ -20,7 +20,7 @@ let cacheFiles = [
   '/static/image/png/dashimg-96.png',
   '/static/image/png/dashimg-192.png'
 ]
-let name = 'chche-v16'
+let name = 'chche-v17'
 self.addEventListener('install', evt => {
   evt.waitUntil(
     caches.open(name).then(cache => {
