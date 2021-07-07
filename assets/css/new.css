@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 * {
-    font-family: -apple-system, "Apple SD Gothic Neo", Ubuntu, Helvetica, "Noto Sans KR", "Malgun Gothic", sans-serif;
+    font-family: -apple-system, "Apple SD Gothic Neo", Ubuntu, "Helvetica Neue", "Noto Sans KR", "Malgun Gothic", sans-serif;
     scroll-behavior: smooth;
 }
 
