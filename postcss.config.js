@@ -1,8 +1,8 @@
 module.exports = {
+  map: process.env.NODE_ENV == 'development',
   plugins: [
     require('tailwindcss'),
     require('autoprefixer'),
-    require('cssnano')({preset: 'default'})
-  ],
-  map: false
+    process.env.NODE_ENV == 'production' ? require('cssnano') : false
+  ]
 }
