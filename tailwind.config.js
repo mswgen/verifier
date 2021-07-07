@@ -16,9 +16,9 @@ module.exports = {
         teal: colors.teal
       },
       fontFamily: {
-        sans: ['-apple-system', '"Apple SD Gothic Neo"', 'Ubuntu', 'Helvetica', '"Noto Sans KR"', '"Malgun Gothic"', 'sans-serif'],
-        serif: ['-apple-system', '"Apple SD Gothic Neo"', 'Ubuntu', 'Helvetica', '"Noto Sans KR"', '"Malgun Gothic"', 'sans-serif'],
-        mono: ['-apple-system', '"Apple SD Gothic Neo"', 'Ubuntu', 'Helvetica', '"Noto Sans KR"', '"Malgun Gothic"', 'sans-serif']
+        sans: ['-apple-system', '"Apple SD Gothic Neo"', 'Ubuntu', '"Helvetica Neue"', '"Noto Sans KR"', '"Malgun Gothic"', 'sans-serif'],
+        serif: ['-apple-system', '"Apple SD Gothic Neo"', 'Ubuntu', '"Helvetica Neue"', '"Noto Sans KR"', '"Malgun Gothic"', 'sans-serif'],
+        mono: ['-apple-system', '"Apple SD Gothic Neo"', 'Ubuntu', '"Helvetica Neue"', '"Noto Sans KR"', '"Malgun Gothic"', 'sans-serif']
       },
       outline: {
         solidwhite: '1px solid white',
