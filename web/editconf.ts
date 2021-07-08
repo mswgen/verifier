@@ -54,7 +54,7 @@ export default {
                         res.end('입력한 미인증 역할을 찾을 수 없어요')
                         return
                     }
-                    if (post.unverified && post.unverified != 'none' && (client.guilds.cache.get(post.guildid)!.roles.cache.get(post.unverified)!.position >= client.guilds.cache.get(post.guildid)!.me!.roles.highest.position || (client.guilds.cache.get(post.guildid)!.roles.cache.get(post.unverified)!.managed)) {
+                    if (post.unverified && post.unverified != 'none' && (client.guilds.cache.get(post.guildid)!.roles.cache.get(post.unverified)!.position >= client.guilds.cache.get(post.guildid)!.me!.roles.highest.position || client.guilds.cache.get(post.guildid)!.roles.cache.get(post.unverified)!.managed)) {
                         res.writeHead(200)
                         res.end('봇이 입력한 미인증 역할을 지급할 수 없어요. 봇 역할 또는 서버 부스터 역할을 선택했다면 일반 역할로 변경해주세요. 그렇지 않으면 verifier의 역할을 선택한 역할 위로 올려주세요.')
                         return
@@ -64,7 +64,7 @@ export default {
                         res.end('입력한 인증 완료 역할을 찾을 수 없어요')
                         return
                     }
-                    if (post.verified && post.verified != 'none' && (client.guilds.cache.get(post.guildid)!.roles.cache.get(post.verified)!.position >= client.guilds.cache.get(post.guildid)!.me!.roles.highest.position || (client.guilds.cache.get(post.guildid)!.roles.cache.get(post.verified)!.managed)) {
+                    if (post.verified && post.verified != 'none' && (client.guilds.cache.get(post.guildid)!.roles.cache.get(post.verified)!.position >= client.guilds.cache.get(post.guildid)!.me!.roles.highest.position || client.guilds.cache.get(post.guildid)!.roles.cache.get(post.verified)!.managed)) {
                         res.writeHead(200)
                         res.end('봇이 입력한 인증 완료 역할을 지급할 수 없어요. 봇 역할 또는 서버 부스터 역할을 선택했다면 일반 역할로 변경해주세요. 그렇지 않으면 verifier의 역할을 선택한 역할 위로 올려주세요.')
                         return
