@@ -18,9 +18,10 @@ let cacheFiles = [
   '/static/js/dash.js',
   '/static/json/offline.json',
   '/static/image/png/dashimg-96.png',
-  '/static/image/png/dashimg-192.png'
+  '/static/image/png/dashimg-192.png',
+  '/?state=dash'
 ]
-let name = 'chche-v17'
+let name = 'chche-v18'
 self.addEventListener('install', evt => {
   evt.waitUntil(
     caches.open(name).then(cache => {
