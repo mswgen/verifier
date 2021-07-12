@@ -4,6 +4,10 @@ if (localStorage.getItem('discord')) {
     if (resp.stat == 'offline') {
       return fetchPage('/static/html/mounts/offline.html')
     }
+    if (resp.code == 1) {
+      localStorage.removeItem('discord')
+      document.location.href = 'https://discord.com/api/oauth2/authorize?client_id=791863119843819520&redirect_uri=https%3A%2F%2Fverifier.teamint.xyz%2Fguildselect&response_type=code&scope=identify%20guilds'
+    }
     localStorage.setItem('discord', resp.refresh)
     window.accessToken = resp.access
     post('/api/getguilds', window.accessToken, undefined, 'json').then(r => {

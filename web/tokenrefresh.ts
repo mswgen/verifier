@@ -30,6 +30,9 @@ export default {
             access: r.data.access_token,
             refresh: r.data.refresh_token
           }))
+        }).catch(() => {
+          res.writeHead(401)
+          res.end(JSON.stringify({code: 1}))
         })
       } else {
         res.writeHead(401)
