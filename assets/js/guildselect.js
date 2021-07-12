@@ -7,6 +7,7 @@ if (localStorage.getItem('discord')) {
     if (resp.code == 1) {
       localStorage.removeItem('discord')
       document.location.href = 'https://discord.com/api/oauth2/authorize?client_id=791863119843819520&redirect_uri=https%3A%2F%2Fverifier.teamint.xyz%2Fguildselect&response_type=code&scope=identify%20guilds'
+      return
     }
     localStorage.setItem('discord', resp.refresh)
     window.accessToken = resp.access
