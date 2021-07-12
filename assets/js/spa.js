@@ -1,6 +1,6 @@
 window.addEventListener('load', init)
 
-function init () {
+function init() {
   window.showHamburger = false
   if (localStorage.getItem('dark')) {
     if (localStorage.getItem('dark') == 'yes') {
@@ -14,38 +14,89 @@ function init () {
     window.dark = true
   }
   darktoggle(true)
-  if (getParam('state')) {
-    if (getParam('state') == 'dash') {
-      if (!getParam('code') && !localStorage.getItem('discord')) {
-        document.location.href = 'https://discord.com/api/oauth2/authorize?client_id=791863119843819520&redirect_uri=https%3A%2F%2Fverifier.teamint.xyz&response_type=code&scope=identify%20guilds&state=dash'
-        return
-      }
-      fetchPage('/static/html/mounts/guildselect.html').then(() => {
-        fetch('/static/js/guildselect.js').then(r => r.text()).then(eval)
-      })
-    } else if (getParam('state') == 'verify') {
-      if (!getParam('token')) {
-        fetchPage('/static/html/mounts/about.html', '#mount', false)
-      } else {
-        fetchPage('/static/html/mounts/verify.html').then(() => {
-          fetch('/static/js/verify.js').then(r => r.text()).then(eval)
+  window.addEventListener('popstate', event => {
+    if (event.state) {
+      if (event.state.page == 'guildselect') {
+        if (!localStorage.getItem('discord')) {
+          document.location.href = 'https://discord.com/api/oauth2/authorize?client_id=791863119843819520&redirect_uri=https%3A%2F%2Fverifier.teamint.xyz%2Fguildselect&response_type=code&scope=identify%20guilds'
+          return
+        }
+        fetchPage('/static/html/mounts/guildselect.html').then(() => {
+          fetch('/static/js/guildselect.js').then(r => r.text()).then(eval)
         })
+      } else if (event.state.page == 'dash') {
+        fetchPage('/static/html/mounts/dash.html').then(() => {
+          fetch('/static/js/dash.js').then(r => r.text()).then(eval)
+        })
+      } else if (event.state.page == 'verify') {
+        if (!getParam('token')) {
+          history.replaceState({page: 'root'}, 'verifier', '/')
+          fetchPage('/static/html/mounts/about.html')
+        } else {
+          fetchPage('/static/html/mounts/verify.html').then(() => {
+            fetch('/static/js/verify.js').then(r => r.text()).then(eval)
+          })
+        }
+      } else if (event.state.page == 'verified') {
+        fetchPage('/static/html/mounts/verified.html')
+      } else {
+        fetchPage('/static/html/mounts/about.html')
       }
     }
+  })
+  if (location.pathname == '/guildselect') {
+    if (!getParam('code') && !localStorage.getItem('discord')) {
+      document.location.href = 'https://discord.com/api/oauth2/authorize?client_id=791863119843819520&redirect_uri=https%3A%2F%2Fverifier.teamint.xyz%2Fguildselect&response_type=code&scope=identify%20guilds'
+      return
+    }
+    if (getParam('code')) {
+      window.dashAccessCode = getParam('code')
+    }
+    history.replaceState({page: 'guildselect'}, '서버 선택하기 - verifier', '/guildselect')
+    fetchPage('/static/html/mounts/guildselect.html', '#mount', false).then(() => {
+      fetch('/static/js/guildselect.js').then(r => r.text()).then(eval)
+    })
+  } else if (location.pathname == '/verify') {
+    if (!getParam('token')) {
+      history.replaceState({page: 'root'}, 'verifier', '/')
+      fetchPage('/static/html/mounts/about.html', '#mount', false)
+    } else {
+      window.verifyToken = getParam('token')
+      history.replaceState({page: 'verify', token: getParam('token')}, '인증하기 - verifier', '/verify')
+      fetchPage('/static/html/mounts/verify.html', '#mount', false).then(() => {
+        fetch('/static/js/verify.js').then(r => r.text()).then(eval)
+      })
+    }
+  } else if (location.pathname == '/dash') {
+    history.replaceState({page: 'guildselect'}, '서버 선택하기 - verifier', '/guildselect')
+    if (!getParam('code') && !localStorage.getItem('discord')) {
+      document.location.href = 'https://discord.com/api/oauth2/authorize?client_id=791863119843819520&redirect_uri=https%3A%2F%2Fverifier.teamint.xyz%2Fguildselect&response_type=code&scope=identify%20guilds'
+      return
+    }
+    fetchPage('/static/html/mounts/guildselect.html', '#mount', false).then(() => {
+      fetch('/static/js/guildselect.js').then(r => r.text()).then(eval)
+    })
+  } else if (location.pathname == '/verified') {
+    history.replaceState({page: 'verified'}, '인증 완료 - verifier', '/verified')
+    fetchPage('/static/html/mounts/verified.html', '#mount', false)
   } else {
+    history.replaceState({page: 'root'}, 'verifier', '/')
     fetchPage('/static/html/mounts/about.html', '#mount', false)
   }
+
   document.querySelector('#skip2main').addEventListener('click', () => {
     document.querySelector('.aboutbutton').focus()
     document.querySelector('#mount').scrollIntoView()
   })
   for (let element of Array.from(document.querySelectorAll('.spa-link-about'))) {
     element.addEventListener('click', () => {
+      history.pushState({page: 'root'}, 'verifier', '/')
       fetchPage('/static/html/mounts/about.html')
     })
   }
   for (let element of Array.from(document.querySelectorAll('.spa-link-logo'))) {
     element.addEventListener('click', () => {
+      history.pushState({page: 'root'}, 'verifier', '/')
       fetchPage('/static/html/mounts/about.html', '#mount', false)
     })
   }
@@ -62,11 +113,12 @@ function init () {
   for (let element of Array.from(document.querySelectorAll('.spa-link-dash'))) {
     element.addEventListener('click', () => {
       if (localStorage.getItem('discord')) {
+        history.pushState({page: 'guildselect'}, '서버 선택하기 - verifier', '/guildselect')
         fetchPage('/static/html/mounts/guildselect.html').then(() => {
           fetch('/static/js/guildselect.js').then(r => r.text()).then(eval)
         })
       } else {
-        document.location.href = 'https://discord.com/api/oauth2/authorize?client_id=791863119843819520&redirect_uri=https%3A%2F%2Fverifier.teamint.xyz&response_type=code&scope=identify%20guilds&state=dash'
+        document.location.href = 'https://discord.com/api/oauth2/authorize?client_id=791863119843819520&redirect_uri=https%3A%2F%2Fverifier.teamint.xyz%2Fguildselect&response_type=code&scope=identify%20guilds'
       }
     })
   }

@@ -1,11 +1,22 @@
 /* eslint-disable no-undef */
 if (!window.accessToken) {
-  document.location.href = 'https://discord.com/api/oauth2/authorize?client_id=791863119843819520&redirect_uri=https%3A%2F%2Fverifier.teamint.xyz&response_type=code&scope=identify%20guilds'
+  document.location.href = 'https://discord.com/api/oauth2/authorize?client_id=791863119843819520&redirect_uri=https%3A%2F%2Fverifier.teamint.xyz%2Fguildselect&response_type=code&scope=identify%20guilds'
 }
 
 post('/api/getconf', window.guildInfo.id, {
-  Authorization: window.accessToken
+  authorization: window.accessToken
 }, 'json').then(resp => {
+  if (resp.status >= 400) {
+    history.replaceState({ page: 'guildselect' }, '서버 선택하기 - verifier', '/guildselect')
+    if (!localStorage.getItem('discord')) {
+      document.location.href = 'https://discord.com/api/oauth2/authorize?client_id=791863119843819520&redirect_uri=https%3A%2F%2Fverifier.teamint.xyz%2Fguildselect&response_type=code&scope=identify%20guilds'
+      return
+    }
+    fetchPage('/static/html/mounts/guildselect.html').then(() => {
+      fetch('/static/js/guildselect.js').then(r => r.text()).then(eval)
+    })
+    return
+  }
   if (resp.stat == 'offline') {
     return fetchPage('/static/html/mounts/offline.html')
   }
@@ -45,7 +56,7 @@ post('/api/getconf', window.guildInfo.id, {
       guildid: window.guildInfo.id,
       channelid: document.querySelector('#channelid').value
     }), {
-      Authorization: window.accessToken
+      authorization: window.accessToken
     }, 'text').then(r => {
       try {
         if (JSON.parse(r).stat == 'offline') {
@@ -54,7 +65,14 @@ post('/api/getconf', window.guildInfo.id, {
       } catch (e) {
         if (r == 'error') {
           alert('이 서버의 설정을 바꿀 수 없어요.')
-          fetchPage('/static/html/mounts/guildselect.html')
+          history.replaceState({ page: 'guildselect' }, '서버 선택하기 - verifier', '/guildselect')
+          if (!localStorage.getItem('discord')) {
+            document.location.href = 'https://discord.com/api/oauth2/authorize?client_id=791863119843819520&redirect_uri=https%3A%2F%2Fverifier.teamint.xyz%2Fguildselect&response_type=code&scope=identify%20guilds'
+            return
+          }
+          return fetchPage('/static/html/mounts/guildselect.html').then(() => {
+            fetch('/static/js/guildselect.js').then(r => r.text()).then(eval)
+          })
         } else if (r != 'ok') {
           alert(r)
         }
@@ -67,7 +85,7 @@ post('/api/getconf', window.guildInfo.id, {
       messageid: document.querySelector('#messageid').value,
       channelid: document.querySelector('#channelid').value
     }), {
-      Authorization: window.accessToken
+      authorization: window.accessToken
     }, 'text').then(r => {
       try {
         if (JSON.parse(r).stat == 'offline') {
@@ -76,7 +94,14 @@ post('/api/getconf', window.guildInfo.id, {
       } catch (e) {
         if (r == 'error') {
           alert('이 서버의 설정을 바꿀 수 없어요.')
-          fetchPage('/static/html/mounts/guildselect.html')
+          history.replaceState({ page: 'guildselect' }, '서버 선택하기 - verifier', '/guildselect')
+          if (!localStorage.getItem('discord')) {
+            document.location.href = 'https://discord.com/api/oauth2/authorize?client_id=791863119843819520&redirect_uri=https%3A%2F%2Fverifier.teamint.xyz%2Fguildselect&response_type=code&scope=identify%20guilds'
+            return
+          }
+          return fetchPage('/static/html/mounts/guildselect.html').then(() => {
+            fetch('/static/js/guildselect.js').then(r => r.text()).then(eval)
+          })
         } else if (r != 'ok') {
           alert(r)
         }
@@ -88,7 +113,7 @@ post('/api/getconf', window.guildInfo.id, {
       guildid: window.guildInfo.id,
       unverified: document.querySelector('#unverified').value || 'none'
     }), {
-      Authorization: window.accessToken
+      authorization: window.accessToken
     }, 'text').then(r => {
       try {
         if (JSON.parse(r).stat == 'offline') {
@@ -97,7 +122,14 @@ post('/api/getconf', window.guildInfo.id, {
       } catch (e) {
         if (r == 'error') {
           alert('이 서버의 설정을 바꿀 수 없어요.')
-          fetchPage('/static/html/mounts/guildselect.html')
+          history.replaceState({ page: 'guildselect' }, '서버 선택하기 - verifier', '/guildselect')
+          if (!localStorage.getItem('discord')) {
+            document.location.href = 'https://discord.com/api/oauth2/authorize?client_id=791863119843819520&redirect_uri=https%3A%2F%2Fverifier.teamint.xyz%2Fguildselect&response_type=code&scope=identify%20guilds'
+            return
+          }
+          return fetchPage('/static/html/mounts/guildselect.html').then(() => {
+            fetch('/static/js/guildselect.js').then(r => r.text()).then(eval)
+          })
         } else if (r != 'ok') {
           alert(r)
         }
@@ -109,7 +141,7 @@ post('/api/getconf', window.guildInfo.id, {
       guildid: window.guildInfo.id,
       verified: document.querySelector('#verified').value || 'none'
     }), {
-      Authorization: window.accessToken
+      authorization: window.accessToken
     }, 'text').then(r => {
       try {
         if (JSON.parse(r).stat == 'offline') {
@@ -118,7 +150,14 @@ post('/api/getconf', window.guildInfo.id, {
       } catch (e) {
         if (r == 'error') {
           alert('이 서버의 설정을 바꿀 수 없어요.')
-          fetchPage('/static/html/mounts/guildselect.html')
+          history.replaceState({ page: 'guildselect' }, '서버 선택하기 - verifier', '/guildselect')
+          if (!localStorage.getItem('discord')) {
+            document.location.href = 'https://discord.com/api/oauth2/authorize?client_id=791863119843819520&redirect_uri=https%3A%2F%2Fverifier.teamint.xyz%2Fguildselect&response_type=code&scope=identify%20guilds'
+            return
+          }
+          return fetchPage('/static/html/mounts/guildselect.html').then(() => {
+            fetch('/static/js/guildselect.js').then(r => r.text()).then(eval)
+          })
         } else if (r != 'ok') {
           alert(r)
         }
@@ -130,7 +169,7 @@ post('/api/getconf', window.guildInfo.id, {
       guildid: window.guildInfo.id,
       verifiedmsg: document.querySelector('#verifiedmsg').value || 'none'
     }), {
-      Authorization: window.accessToken
+      authorization: window.accessToken
     }, 'text').then(r => {
       try {
         if (JSON.parse(r).stat == 'offline') {
@@ -139,7 +178,14 @@ post('/api/getconf', window.guildInfo.id, {
       } catch (e) {
         if (r == 'error') {
           alert('이 서버의 설정을 바꿀 수 없어요.')
-          fetchPage('/static/html/mounts/guildselect.html')
+          history.replaceState({ page: 'guildselect' }, '서버 선택하기 - verifier', '/guildselect')
+          if (!localStorage.getItem('discord')) {
+            document.location.href = 'https://discord.com/api/oauth2/authorize?client_id=791863119843819520&redirect_uri=https%3A%2F%2Fverifier.teamint.xyz%2Fguildselect&response_type=code&scope=identify%20guilds'
+            return
+          }
+          return fetchPage('/static/html/mounts/guildselect.html').then(() => {
+            fetch('/static/js/guildselect.js').then(r => r.text()).then(eval)
+          })
         } else if (r != 'ok') {
           alert(r)
         }
@@ -151,7 +197,7 @@ post('/api/getconf', window.guildInfo.id, {
       guildid: window.guildInfo.id,
       msg: document.querySelector('#msg').value
     }), {
-      Authorization: window.accessToken
+      authorization: window.accessToken
     }, 'text').then(r => {
       try {
         if (JSON.parse(r).stat == 'offline') {
@@ -160,7 +206,14 @@ post('/api/getconf', window.guildInfo.id, {
       } catch (e) {
         if (r == 'error') {
           alert('이 서버의 설정을 바꿀 수 없어요.')
-          fetchPage('/static/html/mounts/guildselect.html')
+          history.replaceState({ page: 'guildselect' }, '서버 선택하기 - verifier', '/guildselect')
+          if (!localStorage.getItem('discord')) {
+            document.location.href = 'https://discord.com/api/oauth2/authorize?client_id=791863119843819520&redirect_uri=https%3A%2F%2Fverifier.teamint.xyz%2Fguildselect&response_type=code&scope=identify%20guilds'
+            return
+          }
+          return fetchPage('/static/html/mounts/guildselect.html').then(() => {
+            fetch('/static/js/guildselect.js').then(r => r.text()).then(eval)
+          })
         } else if (r != 'ok') {
           alert(r)
         }

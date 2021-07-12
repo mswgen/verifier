@@ -13,8 +13,8 @@ if (localStorage.getItem('discord')) {
       return displayGuilds(r)
     })
   })
-} else if (getParam('code')) {
-  post('/api/gettoken', getParam('code'), undefined, 'json').then(resp => {
+} else if (window.dashAccessCode) {
+  post('/api/gettoken', window.dashAccessCode, undefined, 'json').then(resp => {
     if (resp.stat == 'offline') {
       return fetchPage('/static/html/mounts/offline.html')
     }
@@ -28,7 +28,7 @@ if (localStorage.getItem('discord')) {
     })
   })
 } else {
-  fetchPage('/static/html/mounts/about.html')
+  document.location.href = 'https://discord.com/api/oauth2/authorize?client_id=791863119843819520&redirect_uri=https%3A%2F%2Fverifier.teamint.xyz%2Fguildselect&response_type=code&scope=identify%20guilds'
 }
 
 function displayGuilds(list) {
@@ -49,9 +49,10 @@ function displayGuilds(list) {
     document.querySelector('#guild-select-mount').appendChild(element)
     element.addEventListener('click', () => {
       window.guildInfo = {
-        name: x.name,
-        id: x.id
+        id: x.id,
+        name: x.name
       }
+      history.pushState({page: 'dash', guildid: x.id, guildname: x.name}, '대시보드 - verifier', `/dash?guildid=${x.id}&guildname=${x.name}`)
       fetchPage('/static/html/mounts/dash.html').then(() => {
         fetch('/static/js/dash.js').then(r => r.text()).then(eval)
       })

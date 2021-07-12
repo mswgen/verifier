@@ -40,7 +40,13 @@ MongoClient.connect().then(() => {
         let pull = require(`./web/${file}`).default
         if (pull.pathname && pull.run && pull.method) {
           table.addRow(file, '✅');
-          (client as any).paths.set(pull.pathname, pull)
+          if (Array.isArray(pull.pathname)) {
+            pull.pathname.forEach((pathname:string) => {
+              (client as any).paths.set(pathname, pull)
+            })
+          } else {
+            (client as any).paths.set(pull.pathname, pull)
+          }
         } else {
           table.addRow(file, '❌ -> Error')
           continue
@@ -135,7 +141,7 @@ MongoClient.connect().then(() => {
       guild: r.message.guild,
       user: u
     })
-    await u.send(`아래 링크를 통해 인증해주세요.\nhttps://${process.env.DOMAIN}/?state=verify&token=${tkn}`)
+    await u.send(`아래 링크를 통해 인증해주세요.\nhttps://${process.env.DOMAIN}/verify?token=${tkn}`)
   })
   client.on('guildCreate', async guild => {
     let conf = await db.serverConf.findOne({_id: guild.id})

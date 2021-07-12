@@ -3,7 +3,7 @@ import type Discord from 'discord.js'
 import type http from 'http'
 
 export default {
-  pathname: '/',
+  pathname: ['/', '/guildselect', '/dash', '/verify', '/verified'],
   method: 'GET',
   run: async (client: Discord.Client, _db: any, req: http.IncomingMessage, res: http.ServerResponse) => {
     res.setHeader('Link', [

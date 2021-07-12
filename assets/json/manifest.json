@@ -66,7 +66,7 @@
         {
             "name": "대시보드",
             "description": "웹 대시보드 열기",
-            "url": "/?state=dash",
+            "url": "/guildselect",
             "icons": [
                 {
                     "src": "/static/image/png/dashimg-96.png",

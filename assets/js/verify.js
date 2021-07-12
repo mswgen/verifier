@@ -4,9 +4,10 @@ function hcaptchaCallback(token) {
   post('/api/verify', undefined, {
     hcaptcha: token,
     // eslint-disable-next-line no-undef
-    token: getParam('token')
+    token: window.verifyToken
   }, 'text').then(stat => {
     if (stat == 'ok') {
+      history.pushState({page: 'verified'}, '인증 완료 - verifier', '/verified')
       // eslint-disable-next-line no-undef
       fetchPage('/static/html/mounts/verified.html')
     } else {
@@ -16,7 +17,7 @@ function hcaptchaCallback(token) {
 }
 
 // eslint-disable-next-line no-undef
-post('/api/verifyinfo', getParam('token'), undefined, 'json').then(resp => {
+post('/api/verifyinfo', window.verifyToken, undefined, 'json').then(resp => {
   window.verification = resp
   // eslint-disable-next-line no-undef
   document.querySelector('#servertitle').innerHTML = `${verification.guild.name}<br>인증하기`
