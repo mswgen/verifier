@@ -35,7 +35,18 @@ export default {
       key: await fs.readFile('/etc/letsencrypt/live/verifier.intteam.co.kr/privkey.pem', 'utf8')
     }, (req, res) => {
       let parsed = url.parse(req.url as string, true)
-      if ((parsed.pathname as string).startsWith('/static/')) {
+      if ((parsed.pathname as string).startsWith('/.well-known/acme-challenge/')) {
+        fs.readFile(`./.well-known/acme-challenge/${path.parse(parsed.pathname as string).base}`, 'utf8').then(data => {
+          res.writeHead(200)
+          res.end(data)
+        }).catch(() => {
+          res.writeHead(404, {
+            // 'strict-transport-security': 'max-age=86400; includeSubDomains; preload'
+          })
+          res.end('404 Not Found')
+          return
+        })
+      } else if ((parsed.pathname as string).startsWith('/static/')) {
         if ((parsed.pathname as string).startsWith('/static/html/')) {
           if ((parsed.pathname as string).startsWith('/static/html/mounts/')) {
             fs.readFile(`./assets/html/mounts/${path.parse(parsed.pathname as string).base}`, 'utf8').then(data => {
