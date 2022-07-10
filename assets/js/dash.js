@@ -1,6 +1,6 @@
 /* eslint-disable no-undef */
 if (!window.accessToken) {
-  document.location.href = 'https://discord.com/api/oauth2/authorize?client_id=791863119843819520&redirect_uri=https%3A%2F%2Fverifier.teamint.xyz%2Fguildselect&response_type=code&scope=identify%20guilds'
+  document.location.href = 'https://discord.com/api/oauth2/authorize?client_id=791863119843819520&redirect_uri=https%3A%2F%2Fverifier.mswgen.ga%2Fguildselect&response_type=code&scope=identify%20guilds'
 }
 
 post('/api/getconf', window.guildInfo.id, {
@@ -9,7 +9,7 @@ post('/api/getconf', window.guildInfo.id, {
   if (resp.status >= 400) {
     history.replaceState({ page: 'guildselect' }, '서버 선택하기 - verifier', '/guildselect')
     if (!localStorage.getItem('discord')) {
-      document.location.href = 'https://discord.com/api/oauth2/authorize?client_id=791863119843819520&redirect_uri=https%3A%2F%2Fverifier.teamint.xyz%2Fguildselect&response_type=code&scope=identify%20guilds'
+      document.location.href = 'https://discord.com/api/oauth2/authorize?client_id=791863119843819520&redirect_uri=https%3A%2F%2Fverifier.mswgen.ga%2Fguildselect&response_type=code&scope=identify%20guilds'
       return
     }
     fetchPage('/static/html/mounts/guildselect.html').then(() => {
@@ -67,7 +67,7 @@ post('/api/getconf', window.guildInfo.id, {
           alert('이 서버의 설정을 바꿀 수 없어요.')
           history.replaceState({ page: 'guildselect' }, '서버 선택하기 - verifier', '/guildselect')
           if (!localStorage.getItem('discord')) {
-            document.location.href = 'https://discord.com/api/oauth2/authorize?client_id=791863119843819520&redirect_uri=https%3A%2F%2Fverifier.teamint.xyz%2Fguildselect&response_type=code&scope=identify%20guilds'
+            document.location.href = 'https://discord.com/api/oauth2/authorize?client_id=791863119843819520&redirect_uri=https%3A%2F%2Fverifier.mswgen.ga%2Fguildselect&response_type=code&scope=identify%20guilds'
             return
           }
           return fetchPage('/static/html/mounts/guildselect.html').then(() => {
@@ -96,7 +96,7 @@ post('/api/getconf', window.guildInfo.id, {
           alert('이 서버의 설정을 바꿀 수 없어요.')
           history.replaceState({ page: 'guildselect' }, '서버 선택하기 - verifier', '/guildselect')
           if (!localStorage.getItem('discord')) {
-            document.location.href = 'https://discord.com/api/oauth2/authorize?client_id=791863119843819520&redirect_uri=https%3A%2F%2Fverifier.teamint.xyz%2Fguildselect&response_type=code&scope=identify%20guilds'
+            document.location.href = 'https://discord.com/api/oauth2/authorize?client_id=791863119843819520&redirect_uri=https%3A%2F%2Fverifier.mswgen.ga%2Fguildselect&response_type=code&scope=identify%20guilds'
             return
           }
           return fetchPage('/static/html/mounts/guildselect.html').then(() => {
@@ -124,7 +124,7 @@ post('/api/getconf', window.guildInfo.id, {
           alert('이 서버의 설정을 바꿀 수 없어요.')
           history.replaceState({ page: 'guildselect' }, '서버 선택하기 - verifier', '/guildselect')
           if (!localStorage.getItem('discord')) {
-            document.location.href = 'https://discord.com/api/oauth2/authorize?client_id=791863119843819520&redirect_uri=https%3A%2F%2Fverifier.teamint.xyz%2Fguildselect&response_type=code&scope=identify%20guilds'
+            document.location.href = 'https://discord.com/api/oauth2/authorize?client_id=791863119843819520&redirect_uri=https%3A%2F%2Fverifier.mswgen.ga%2Fguildselect&response_type=code&scope=identify%20guilds'
             return
           }
           return fetchPage('/static/html/mounts/guildselect.html').then(() => {
@@ -152,7 +152,7 @@ post('/api/getconf', window.guildInfo.id, {
           alert('이 서버의 설정을 바꿀 수 없어요.')
           history.replaceState({ page: 'guildselect' }, '서버 선택하기 - verifier', '/guildselect')
           if (!localStorage.getItem('discord')) {
-            document.location.href = 'https://discord.com/api/oauth2/authorize?client_id=791863119843819520&redirect_uri=https%3A%2F%2Fverifier.teamint.xyz%2Fguildselect&response_type=code&scope=identify%20guilds'
+            document.location.href = 'https://discord.com/api/oauth2/authorize?client_id=791863119843819520&redirect_uri=https%3A%2F%2Fverifier.mswgen.ga%2Fguildselect&response_type=code&scope=identify%20guilds'
             return
           }
           return fetchPage('/static/html/mounts/guildselect.html').then(() => {
@@ -180,7 +180,7 @@ post('/api/getconf', window.guildInfo.id, {
           alert('이 서버의 설정을 바꿀 수 없어요.')
           history.replaceState({ page: 'guildselect' }, '서버 선택하기 - verifier', '/guildselect')
           if (!localStorage.getItem('discord')) {
-            document.location.href = 'https://discord.com/api/oauth2/authorize?client_id=791863119843819520&redirect_uri=https%3A%2F%2Fverifier.teamint.xyz%2Fguildselect&response_type=code&scope=identify%20guilds'
+            document.location.href = 'https://discord.com/api/oauth2/authorize?client_id=791863119843819520&redirect_uri=https%3A%2F%2Fverifier.mswgen.ga%2Fguildselect&response_type=code&scope=identify%20guilds'
             return
           }
           return fetchPage('/static/html/mounts/guildselect.html').then(() => {
@@ -208,7 +208,7 @@ post('/api/getconf', window.guildInfo.id, {
           alert('이 서버의 설정을 바꿀 수 없어요.')
           history.replaceState({ page: 'guildselect' }, '서버 선택하기 - verifier', '/guildselect')
           if (!localStorage.getItem('discord')) {
-            document.location.href = 'https://discord.com/api/oauth2/authorize?client_id=791863119843819520&redirect_uri=https%3A%2F%2Fverifier.teamint.xyz%2Fguildselect&response_type=code&scope=identify%20guilds'
+            document.location.href = 'https://discord.com/api/oauth2/authorize?client_id=791863119843819520&redirect_uri=https%3A%2F%2Fverifier.mswgen.ga%2Fguildselect&response_type=code&scope=identify%20guilds'
             return
           }
           return fetchPage('/static/html/mounts/guildselect.html').then(() => {

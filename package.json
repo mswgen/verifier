@@ -1,7 +1,7 @@
 {
   "name": "verifier",
   "version": "1.0.0",
-  "description": "Discord server verification bot made by Team int",
+  "description": "Discord server verification bot",
   "dependencies": {
     "@types/mongodb": "^3.6.17",
     "ascii-table": "0.0.9",
@@ -24,14 +24,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Team-int/verifier.git"
+    "url": "git+https://github.com/mswgen/verifier.git"
   },
-  "author": "Team-int",
+  "author": "mswgen",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/Team-int/verifier/issues"
+    "url": "https://github.com/mswgen/verifier/issues"
   },
-  "homepage": "https://github.com/Team-int/verifier#readme",
+  "homepage": "https://github.com/mswgen/verifier#readme",
   "devDependencies": {
     "@types/node": "^15.12.1",
     "autoprefixer": "^10.2.6",

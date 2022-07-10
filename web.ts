@@ -31,8 +31,8 @@ export default {
       console.log('http server started')
     })
     const httpsServer = https.createServer({
-      cert: await fs.readFile('/etc/letsencrypt/live/verifier.teamint.xyz/fullchain.pem', 'utf8'),
-      key: await fs.readFile('/etc/letsencrypt/live/verifier.teamint.xyz/privkey.pem', 'utf8')
+      cert: await fs.readFile('/etc/letsencrypt/live/verifier.mswgen.ga/fullchain.pem', 'utf8'),
+      key: await fs.readFile('/etc/letsencrypt/live/verifier.mswgen.ga/privkey.pem', 'utf8')
     }, (req, res) => {
       let parsed = url.parse(req.url as string, true)
       if ((parsed.pathname as string).startsWith('/.well-known/acme-challenge/')) {
