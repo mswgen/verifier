@@ -105,6 +105,8 @@ dist
 
 assets/css/compiled.css
 
+**/*/.DS_Store
+
 .yarn/*
 !.yarn/cache
 !.yarn/patches
