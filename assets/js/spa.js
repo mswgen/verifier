@@ -1,6 +1,9 @@
 window.addEventListener('load', init)
 
 function init() {
+  window.isDev = location.hostname == 'localhost'
+  window.clientID = window.isDev ? '999664038332092477' : '791863119843819520'
+  window.redirectURI = window.isDev ? 'http://localhost:4430/guildselect' : 'https://verifier.mswgen.ga/guildselect'
   window.showHamburger = false
   if (localStorage.getItem('dark')) {
     if (localStorage.getItem('dark') == 'yes') {
@@ -18,7 +21,7 @@ function init() {
     if (event.state) {
       if (event.state.page == 'guildselect') {
         if (!localStorage.getItem('discord')) {
-          document.location.href = 'https://discord.com/api/oauth2/authorize?client_id=791863119843819520&redirect_uri=https%3A%2F%2Fverifier.mswgen.ga%2Fguildselect&response_type=code&scope=identify%20guilds'
+	  document.location.href = `https://discord.com/api/oauth2/authorize?client_id=${window.clientID}&redirect_uri=${encodeURIComponent(window.redirectURI)}&response_type=code&scope=identify%20guilds`
           return
         }
         fetchPage('/static/html/mounts/guildselect.html').then(() => {
@@ -46,7 +49,7 @@ function init() {
   })
   if (location.pathname == '/guildselect') {
     if (!getParam('code') && !localStorage.getItem('discord')) {
-      document.location.href = 'https://discord.com/api/oauth2/authorize?client_id=791863119843819520&redirect_uri=https%3A%2F%2Fverifier.mswgen.ga%2Fguildselect&response_type=code&scope=identify%20guilds'
+      document.location.href = `https://discord.com/api/oauth2/authorize?client_id=${window.clientID}&redirect_uri=${encodeURIComponent(window.redirectURI)}&response_type=code&scope=identify%20guilds`
       return
     }
     if (getParam('code')) {
@@ -70,7 +73,7 @@ function init() {
   } else if (location.pathname == '/dash') {
     history.replaceState({page: 'guildselect'}, '서버 선택하기 - verifier', '/guildselect')
     if (!getParam('code') && !localStorage.getItem('discord')) {
-      document.location.href = 'https://discord.com/api/oauth2/authorize?client_id=791863119843819520&redirect_uri=https%3A%2F%2Fverifier.mswgen.ga%2Fguildselect&response_type=code&scope=identify%20guilds'
+      document.location.href = `https://discord.com/api/oauth2/authorize?client_id=${window.clientID}&redirect_uri=${encodeURIComponent(window.redirectURI)}&response_type=code&scope=identify%20guilds`
       return
     }
     fetchPage('/static/html/mounts/guildselect.html', '#mount', false).then(() => {
@@ -107,7 +110,7 @@ function init() {
   }
   for (let element of Array.from(document.querySelectorAll('.spa-link-invite'))) {
     element.addEventListener('click', () => {
-      document.location.href = 'https://discord.com/oauth2/authorize?client_id=791863119843819520&permissions=8&scope=bot'
+      document.location.href = `https://discord.com/oauth2/authorize?client_id=${window.clientID}&permissions=8&scope=bot`
     })
   }
   for (let element of Array.from(document.querySelectorAll('.spa-link-dash'))) {
@@ -118,7 +121,7 @@ function init() {
           fetch('/static/js/guildselect.js').then(r => r.text()).then(eval)
         })
       } else {
-        document.location.href = 'https://discord.com/api/oauth2/authorize?client_id=791863119843819520&redirect_uri=https%3A%2F%2Fverifier.mswgen.ga%2Fguildselect&response_type=code&scope=identify%20guilds'
+        document.location.href = `https://discord.com/api/oauth2/authorize?client_id=${window.clientID}&redirect_uri=${encodeURIComponent(window.redirectURI)}&response_type=code&scope=identify%20guilds`
       }
     })
   }

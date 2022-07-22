@@ -18,7 +18,7 @@ export default {
           client_secret: process.env.CLIENT_SECRET,
           code: post,
           scope: 'identify guilds',
-          redirect_uri: 'https://verifier.mswgen.ga/guildselect',
+          redirect_uri: process.env.REDIRECT,
           grant_type: 'authorization_code'
         }), {
           headers: {

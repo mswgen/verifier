@@ -5,35 +5,7 @@ import fs from 'fs/promises'
 import path from 'path'
 import Discord from 'discord.js'
 import type mongodb from 'mongodb'
-export default {
-  start: async (client: Discord.Client, db: { serverConf: mongodb.Collection, notifications: mongodb.Collection }) => {
-    const httpServer = http.createServer((req, res) => {
-      let parsed = url.parse(req.url as string, true)
-      if ((parsed.pathname as string).startsWith('/.well-known/acme-challenge/')) {
-        fs.readFile(`./.well-known/acme-challenge/${path.parse(parsed.pathname as string).base}`, 'utf8').then(data => {
-          res.writeHead(200)
-          res.end(data)
-        }).catch(() => {
-          res.writeHead(404, {
-            // 'strict-transport-security': 'max-age=86400; includeSubDomains; preload'
-          })
-          res.end('404 Not Found')
-          return
-        })
-      } else {
-        res.writeHead(302, {
-          'Location': `https://${process.env.DOMAIN}${req.url}`
-        })
-        res.end()
-      }
-    })
-    httpServer.listen(8000, () => {
-      console.log('http server started')
-    })
-    const httpsServer = https.createServer({
-      cert: await fs.readFile('/etc/letsencrypt/live/verifier.mswgen.ga/fullchain.pem', 'utf8'),
-      key: await fs.readFile('/etc/letsencrypt/live/verifier.mswgen.ga/privkey.pem', 'utf8')
-    }, (req, res) => {
+function handleMainServer(req: http.IncomingMessage, res: http.ServerResponse, client: Discord.Client, db: { serverConf: mongodb.Collection, notifications: mongodb.Collection }) {
       let parsed = url.parse(req.url as string, true)
       if ((parsed.pathname as string).startsWith('/.well-known/acme-challenge/')) {
         fs.readFile(`./.well-known/acme-challenge/${path.parse(parsed.pathname as string).base}`, 'utf8').then(data => {
@@ -200,9 +172,43 @@ export default {
           res.end('404 Not Found')
         }
       }
-    })
-    httpsServer.listen(4430, () => {
-      console.log('https server started')
+    }
+export default {
+  start: (client: Discord.Client, db: { serverConf: mongodb.Collection, notifications: mongodb.Collection }) => {
+    return new Promise(async (resolve, reject) => {
+      if (process.env.NODE_ENV == 'production') {
+        const certServer = http.createServer((req, res) => {
+          let parsed = url.parse(req.url as string, true)
+          if ((parsed.pathname as string).startsWith('/.well-known/acme-challenge/')) {
+            fs.readFile(`./.well-known/acme-challenge/${path.parse(parsed.pathname as string).base}`, 'utf8').then(data => {
+              res.writeHead(200)
+              res.end(data)
+            }).catch(() => {
+              res.writeHead(404, {
+                // 'strict-transport-security': 'max-age=86400; includeSubDomains; preload'
+              })
+              res.end('404 Not Found')
+              return
+            })
+          } else {
+            res.writeHead(302, {
+              'Location': `https://${process.env.DOMAIN}${req.url}`
+            })
+            res.end()
+          }
+        })
+        certServer.listen(8000);
+      }
+      let mainServer: http.Server
+      if (process.env.NODE_ENV == 'production') {
+        mainServer = https.createServer({
+          cert: await fs.readFile('/etc/letsencrypt/live/verifier.mswgen.ga/fullchain.pem', 'utf8'),
+          key: await fs.readFile('/etc/letsencrypt/live/verifier.mswgen.ga/privkey.pem', 'utf8')
+        }, (req, res) => { handleMainServer(req, res, client, db) })
+      } else {
+        mainServer = http.createServer((req, res) => { handleMainServer(req, res, client, db) })
+      }
+      mainServer.listen(4430, (() => { resolve(null) }))
     })
   }
 }

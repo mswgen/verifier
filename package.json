@@ -12,15 +12,16 @@
   },
   "main": "dist/index.js",
   "scripts": {
-    "start": "node dist/index.js",
+    "start": "cross-env NODE_ENV=production node dist/index.js",
+    "dev": "cross-env NODE_ENV=development node dist/index.js",
     "postcss": "cross-env NODE_ENV=production postcss -o assets/css/compiled.css assets/css/new.css",
     "postcss:dev": "cross-env NODE_ENV=development postcss -o assets/css/compiled.css assets/css/new.css",
-    "tsc:darwin:linux": "rm -rf dist && tsc",
+    "tsc:darwin:linux:android": "rm -rf dist && tsc",
     "tsc:win32": "rd /s /q dist && tsc",
     "tsc": "run-script-os",
     "lint": "eslint --fix .",
     "build": "yarn postcss && yarn tsc",
-    "dev": "yarn postcss:dev && yarn tsc"
+    "devbuild": "yarn postcss:dev && yarn tsc"
   },
   "repository": {
     "type": "git",

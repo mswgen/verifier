@@ -60,7 +60,7 @@ self.addEventListener('fetch', event => {
             })
           return response
         }).catch(() => {
-          if (event.request.url.startsWith('https://verifier.mswgen.ga/api/')) {
+          if (event.request.url.startsWith('https://verifier.mswgen.ga/api/') || event.request.url.startsWith('http://localhost:4430/api/')) {
             return caches.open(name).then(async cache => {
               return await cache.match('/static/json/offline.json')
             })
