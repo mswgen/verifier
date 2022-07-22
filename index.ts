@@ -17,13 +17,21 @@ const client = new Discord.Client({
       $browser: 'Discord Android'
     }
   }
-});
-(client as any).paths = new Discord.Collection();
-(client as any).verifyQueue = new Discord.Collection();
-const MongoClient = new mongodb.MongoClient(`mongodb+srv://user:${process.env.DB_PASS}@cluster0.xoxgq.mongodb.net/myFirstDatabase?retryWrites=true&w=majority`, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true
 })
+async function addGuildToDB(db: mongodb.Collection, guildID: string): Promise<void> {
+  await db.insertOne({
+    server: guildID,
+    unverifiedRole: undefined,
+    verifiedRole: undefined,
+    channelId: undefined,
+    messageId: undefined,
+    msg: '{서버.이름} 규칙에 동의하신다면 아래 버튼을 눌러주세요.',
+    verifiedMsg: null
+  })
+}
+(client as any).paths = new Discord.Collection();
+(client as any).verifyQueue = new Discord.Collection()
+const MongoClient = new mongodb.MongoClient(`mongodb+srv://user:${process.env.DB_PASS}@cluster0.xoxgq.mongodb.net/myFirstDatabase?retryWrites=true&w=majority`)
 process.stdout.write('\r\x1b[32m[2/6] Finished setting up env and initialized clients!\x1b[0m\n');
 if (process.env.NODE_ENV == 'development') {
   process.stdout.write('\x1b[33mNODE_ENV is development. Using dev bot and dev DB.\x1b[0m\n');
@@ -135,7 +143,7 @@ MongoClient.connect().then(() => {
         }), {
           headers: {
             'Content-Type': 'application/json',
-            'Authorization': process.env.KOREANBOTS
+            'Authorization': process.env.KOREANBOTS!
           }
         }).then(() => {}).catch(() => {})
       }, 180000)
@@ -143,15 +151,23 @@ MongoClient.connect().then(() => {
   })
   client.on('guildMemberAdd', async member => {
     if (member.partial) await member.fetch()
-    let conf = await db.serverConf.findOne({_id: member.guild.id})
+    let conf = await db.serverConf.findOne({server: member.guild.id})
+    if (!conf) {
+      await addGuildToDB(db.serverConf, member.guild.id)
+      return
+    }
     if (!conf.unverifiedRole) return
     await member.roles.add(conf.unverifiedRole)
   })
   client.on('messageReactionAdd', async (r, u) => {
     if (r.partial) await r.fetch()
     if (r.message.partial) await r.message.fetch()
-    let conf = await db.serverConf.findOne({_id: r.message.guild!.id})
-    if (r.message.channel.id != conf.channelId || r.message.id != conf.messageId || u.bot) return
+    let conf = await db.serverConf.findOne({server: r.message.guild!.id})
+    if (!conf) {
+      await addGuildToDB(db.serverConf, r.message.guild!.id)
+      return
+    }
+    if (r.message.channel.id != conf!.channelId || r.message.id != conf!.messageId || u.bot) return
     await r.users.remove(u.id)
     if ((conf.verifiedRole && client.guilds.cache.get(r.message.guild!.id)!.member(u.id)!.roles.cache.has(conf.verifiedRole)) || (conf.unverifiedRole && !client.guilds.cache.get(r.message.guild!.id)!.member(u.id)!.roles.cache.has(conf.unverifiedRole))) return
     let tkn = tokenGen();
@@ -160,25 +176,28 @@ MongoClient.connect().then(() => {
       guild: r.message.guild,
       user: u
     })
-    await u.send(`아래 링크를 통해 인증해주세요.\nhttp${process.env.NODE_ENV == 'production' ? 's' : ''}://${process.env.DOMAIN}/verify?token=${tkn}`)
+    const embed = new Discord.MessageEmbed()
+      .setTitle(`${r.message.guild!.name} 인증`)
+      .setDescription(`[여기를 클릭해 인증해주세요.](http${process.env.NODE_ENV == 'production' ? 's' : ''}://${process.env.DOMAIN}/verify?token=${tkn})\n인증 링크는 3분간 유효합니다.`)
+      .setTimestamp()
+      .setFooter(u.tag, u.displayAvatarURL())
+      .setColor('RANDOM')
+    if (r.message.guild!.icon) embed.setThumbnail(r.message.guild!.iconURL()!)
+    await u.send(embed)
+    setTimeout(() => {
+      if ((client as any).verifyQueue.has(tkn)) {
+      (client as any).verifyQueue.delete(tkn)
+      }
+    }, 180000)
   })
   client.on('guildCreate', async guild => {
-    let conf = await db.serverConf.findOne({_id: guild.id})
-    if (conf) return
-    await db.serverConf.insertOne({
-      _id: guild.id,
-      unverifiedRole: undefined,
-      verifiedRole: undefined,
-      channelId: undefined,
-      messageId: undefined,
-      msg: '{서버.이름} 규칙에 동의하신다면 아래 버튼을 눌러주세요.',
-      verifiedMsg: null
-    })
+    let conf = await db.serverConf.findOne({server: guild.id})
+    if (!conf) await addGuildToDB(db.serverConf, guild.id)
   })
   client.on('guildDelete', async guild => {
-    let conf = await db.serverConf.findOne({_id: guild.id})
+    let conf = await db.serverConf.findOne({server: guild.id})
     if (!conf) return
-    await db.serverConf.deleteOne({_id: guild.id})
+    await db.serverConf.deleteOne({server: guild.id})
   })
   process.stdout.write(`\r\x1b[K\x1b[32m[4/6] Imported ${actLoadedCnt} web handlers(${loadedCnt - actLoadedCnt} fail)!\x1b[0m\n`);
   process.stdout.write('[5/6] Starting bot...');

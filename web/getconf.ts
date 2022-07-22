@@ -23,7 +23,7 @@ export default {
             res.end('You can\'t change settings of this guild.')
             return
           }
-          const dbVal = await db.serverConf.findOne({_id: post})
+          const dbVal = await db.serverConf.findOne({server: post})
           res.writeHead(200)
           res.end(JSON.stringify({
             channelid: dbVal.channelId,

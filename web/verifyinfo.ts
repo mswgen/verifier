@@ -29,7 +29,7 @@ export default {
             name: (client as any).verifyQueue.get(post).user.tag.replace(/</gi, '&lt;').replace(/>/gi, '&gt;'),
             id: (client as any).verifyQueue.get(post).user.id
           },
-          text: ((await db.serverConf.findOne({ _id: (client as any).verifyQueue.get(post).guild.id })).msg || '{서버.이름} 규칙에 동의하신다면 아래 reCAPTCHA를 풀어주세요.')
+          text: ((await db.serverConf.findOne({ server: (client as any).verifyQueue.get(post).guild.id })).msg || '{서버.이름} 규칙에 동의하신다면 아래 reCAPTCHA를 풀어주세요.')
             .replace(/{서버.이름}/gi, (client as any).verifyQueue.get(post).guild.name)
             .replace(/{유저.닉네임}/gi, (client as any).verifyQueue.get(post).user.username)
             .replace(/{유저.태그숫자}/gi, (client as any).verifyQueue.get(post).user.discriminator)

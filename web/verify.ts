@@ -17,7 +17,7 @@ export default {
                     res.writeHead(400)
                     res.end('hCaptcha authentication failed')
                 } else {
-                    let conf = await db.serverConf.findOne({ _id: (client as any).verifyQueue.get(req.headers.token).guild.id })
+                    let conf = await db.serverConf.findOne({ server: (client as any).verifyQueue.get(req.headers.token).guild.id })
                     if (conf.verifiedMsg) {
                         (client as any).verifyQueue.get(req.headers.token).user.send(conf.verifiedMsg)
                     }

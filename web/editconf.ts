@@ -79,7 +79,7 @@ export default {
                         res.end('인증 완료 메세지는 최대 2000자까지 입력할 수 있어요.')
                         return
                     }
-                    let prevConf = await db.serverConf.findOne({ _id: post.guildid })
+                    let prevConf = await db.serverConf.findOne({ server: post.guildid })
                     if (post.channelid) prevConf.channelId = post.channelid
                     if (post.messageid) prevConf.messageId = post.messageid
                     if (post.verified) {
@@ -104,7 +104,7 @@ export default {
                             prevConf.verifiedMsg = post.verifiedmsg
                         }
                     }
-                    await db.serverConf.updateOne({ _id: post.guildid }, {
+                    await db.serverConf.updateOne({ server: post.guildid }, {
                         $set: prevConf
                     })
                     res.writeHead(200)
