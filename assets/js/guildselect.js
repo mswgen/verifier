@@ -1,4 +1,4 @@
-/* eslint-disable no-undef */
+/* global post, fetchPage */
 if (localStorage.getItem('discord')) {
   post('/api/tokenrefresh', localStorage.getItem('discord'), undefined, 'json').then(resp => {
     if (resp.stat == 'offline') {

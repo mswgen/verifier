@@ -21,7 +21,7 @@ function init() {
     if (event.state) {
       if (event.state.page == 'guildselect') {
         if (!localStorage.getItem('discord')) {
-	  document.location.href = `https://discord.com/api/oauth2/authorize?client_id=${window.clientID}&redirect_uri=${encodeURIComponent(window.redirectURI)}&response_type=code&scope=identify%20guilds`
+          document.location.href = `https://discord.com/api/oauth2/authorize?client_id=${window.clientID}&redirect_uri=${encodeURIComponent(window.redirectURI)}&response_type=code&scope=identify%20guilds`
           return
         }
         fetchPage('/static/html/mounts/guildselect.html').then(() => {

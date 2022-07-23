@@ -1,12 +1,13 @@
 module.exports = {
   'env': {
     'browser': true,
-    'es2021': true,
-    'node': true
+    'es2022': true,
+    'node': true,
+    'mongo': true,
+    'serviceworker': true
   },
   'extends': 'eslint:recommended',
   'parserOptions': {
-    'ecmaVersion': 12,
     'sourceType': 'module'
   },
   'rules': {
@@ -26,5 +27,6 @@ module.exports = {
       'error',
       'never'
     ]
-  }
+  },
+  'reportUnusedDisableDirectives': true
 }
