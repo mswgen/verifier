@@ -1,7 +1,6 @@
 const colors = require('tailwindcss/colors')
 module.exports = {
-  mode: 'jit',
-  purge: ['./assets/html/**/*.html'],
+  content: ['./assets/html/**/*.html'],
   darkMode: 'class',
   theme: {
     extend: {
@@ -10,10 +9,11 @@ module.exports = {
         'primary':'#141a23',
         'foreground':'#181e2a',
         'card': '#F5F5F7',
-        ...theme(colors)
+        ...theme('colors')
       }),
       colors: {
-        teal: colors.teal
+        teal: colors.teal,
+        current: 'currentColor'
       },
       fontFamily: {
         sans: ['-apple-system', '"Apple SD Gothic Neo"', 'Ubuntu', '"Helvetica Neue"', '"Noto Sans KR"', '"Malgun Gothic"', 'sans-serif'],
@@ -25,8 +25,5 @@ module.exports = {
         solidblack: '1px solid black'
       }
     }
-  },
-  variants: {
-    extend: {}
   }
 }

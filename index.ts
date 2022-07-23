@@ -1,9 +1,9 @@
 console.log('Booting verifier...');
 process.stdout.write('[1/6] Importing modules...');
 import Discord from 'discord.js'
-import fs from 'fs'
-import path from 'path'
-import mongodb from 'mongodb'
+import * as fs from 'fs'
+import * as path from 'path'
+import * as mongodb from 'mongodb'
 import dotenv from 'dotenv'
 import axios from 'axios'
 process.stdout.write('\r\x1b[32m[1/6] All modules imported!\x1b[0m\n');
@@ -31,7 +31,7 @@ async function addGuildToDB(db: mongodb.Collection, guildID: string): Promise<vo
 }
 (client as any).paths = new Discord.Collection();
 (client as any).verifyQueue = new Discord.Collection()
-const MongoClient = new mongodb.MongoClient(`mongodb+srv://user:${process.env.DB_PASS}@cluster0.xoxgq.mongodb.net/myFirstDatabase?retryWrites=true&w=majority`)
+const MongoClient = new mongodb.MongoClient(`mongodb+srv://user:${process.env.DB_PASS}@cluster0.ubmqr8k.mongodb.net/?retryWrites=true&w=majority`)
 process.stdout.write('\r\x1b[32m[2/6] Finished setting up env and initialized clients!\x1b[0m\n');
 if (process.env.NODE_ENV == 'development') {
   process.stdout.write('\x1b[33mNODE_ENV is development. Using dev bot and dev DB.\x1b[0m\n');

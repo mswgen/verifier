@@ -12,7 +12,7 @@ export default {
             res.writeHead(400)
             res.end('Invalid token')
         } else {
-            axios.get(`https://hcaptcha.com/siteverify?secret=${process.env.HCAPTCHA}&response=${req.headers.hcaptcha}&remoteip=${req.headers['cf-connecting-ip'] || req.headers['x-forwarded-for']}&sitekey=87b3c11a-f500-4c15-9fb2-1de943d2ac93`).then(async hcaptchaRes => {
+            axios.get(`https://hcaptcha.com/siteverify?secret=${process.env.HCAPTCHA}&response=${req.headers.hcaptcha}&remoteip=${req.headers['cf-connecting-ip'] || req.headers['x-forwarded-for'] || req.socket.remoteAddress}&sitekey=87b3c11a-f500-4c15-9fb2-1de943d2ac93`).then(async hcaptchaRes => {
                 if (hcaptchaRes.data.success != true) {
                     console.log(hcaptchaRes.data)
                     res.writeHead(400)

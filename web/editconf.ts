@@ -45,6 +45,7 @@ export default {
                             let msg = await (client.guilds.cache.get(post.guildid)!.channels.cache.find(x => x.id == post.channelid) as Discord.TextChannel).messages.fetch(post.messageid)
                             msg?.react('✅')
                         } catch (e) {
+                            console.log(e)
                             res.writeHead(200)
                             res.end('입력한 메세지를 찾을 수 없어요')
                             return
