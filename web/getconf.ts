@@ -19,7 +19,7 @@ export default {
             Authorization: `Bearer ${req.headers.authorization}`
           }
         }).then(async r => {
-          if (!r.data.some((x:any) => x.id == post) || !new Discord.Permissions(r.data.find((x:any) => x.id == post).permissions).has('MANAGE_GUILD') || !r.data.some((x:any) => client.guilds.cache.get(x.id)?.me?.hasPermission(['MANAGE_GUILD', 'MANAGE_ROLES']))) {
+          if (!r.data.some((x:any) => x.id == post) || !new Discord.PermissionsBitField(BigInt(r.data.find((x:any) => x.id == post).permissions)).has(Discord.PermissionFlagsBits.ManageGuild) || !r.data.some((x:any) => client.guilds.cache.get(x.id)?.members.me?.permissions.has([Discord.PermissionFlagsBits.ManageGuild, Discord.PermissionFlagsBits.ManageRoles]))) {
             res.writeHead(403)
             res.end('You can\'t change settings of this guild.')
             return
@@ -33,10 +33,10 @@ export default {
             verified: dbVal.verifiedRole,
             msg: dbVal.msg,
             verifiedmsg: dbVal.verifiedMsg,
-            availableChannels: client.guilds.cache.get(post)?.channels.cache.filter(x => x.type == 'text' && x.permissionsFor(client.user!)!.has(['VIEW_CHANNEL', 'ADD_REACTIONS', 'MANAGE_MESSAGES', 'READ_MESSAGE_HISTORY'])).map(x => {
+            availableChannels: client.guilds.cache.get(post)?.channels.cache.filter(x => x.type == Discord.ChannelType.GuildText && x.permissionsFor(client.user!)!.has([Discord.PermissionFlagsBits.ViewChannel, Discord.PermissionFlagsBits.AddReactions, Discord.PermissionFlagsBits.ManageMessages, Discord.PermissionFlagsBits.ReadMessageHistory])).map(x => {
               return {name: x.name, id: x.id}
             }),
-            availableRoles: client.guilds.cache.get(post)?.roles.cache.filter(x =>  x.position < x.guild.me!.roles.highest.position && x.id != post && !x.managed).map(x => {
+            availableRoles: client.guilds.cache.get(post)?.roles.cache.filter(x =>  x.position < x.guild.members.me!.roles.highest.position && x.id != post && !x.managed).map(x => {
               return {
                 id: x.id,
                 name: x.name

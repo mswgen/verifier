@@ -20,7 +20,7 @@ export default {
           res.writeHead(200, {
             'Content-Type': "application/json"
           })
-          res.end(JSON.stringify(r.data.filter((x:any) => client.guilds.cache.get(x.id) && client.guilds.cache.get(x.id)!.me!.hasPermission(['MANAGE_GUILD', 'MANAGE_ROLES']) && new Discord.Permissions(x.permissions).has('MANAGE_GUILD')).map((x:{id:string, name:string, icon:string}) => {
+          res.end(JSON.stringify(r.data.filter((x:any) => client.guilds.cache.get(x.id) && client.guilds.cache.get(x.id)!.members.me!.permissions.has([Discord.PermissionFlagsBits.ManageGuild, Discord.PermissionFlagsBits.ManageRoles]) && new Discord.PermissionsBitField(BigInt(x.permissions)).has(Discord.PermissionFlagsBits.ManageGuild)).map((x:{id:string, name:string, icon:string}) => {
             return {
               id: x.id,
               name: x.name.replace(/</gi, '&lt;').replace(/>/gi, '&gt;'),

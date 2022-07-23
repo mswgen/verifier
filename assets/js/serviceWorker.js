@@ -23,7 +23,7 @@ let cacheFiles = [
   '/dash',
   '/verified'
 ]
-let name = 'chche-v21'
+let name = 'chche-v22'
 self.addEventListener('install', evt => {
   evt.waitUntil(
     caches.open(name).then(cache => {

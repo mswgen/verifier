@@ -1,4 +1,4 @@
-/* global post, fetchPage, verification, grecaptcha */
+/* global post, fetchPage, verification, hcaptcha */
 // eslint-disable-next-line no-unused-vars
 function hcaptchaCallback(token) {
   post('/api/verify', undefined, {
@@ -20,10 +20,10 @@ post('/api/verifyinfo', window.verifyToken, undefined, 'json').then(resp => {
   document.querySelector('#username').innerHTML = verification.user.name
   document.querySelector('#verifytext').innerHTML = verification.text
   document.querySelector('#verify').addEventListener('click', () => {
-    grecaptcha.execute()
+    hcaptcha.execute()
   })
   const hcaptchaInject = document.createElement('script')
-  hcaptchaInject.setAttribute('src', 'https://hcaptcha.com/1/api.js?onload=recaptchaLoad')
+  hcaptchaInject.setAttribute('src', 'https://hcaptcha.com/1/api.js?onload=hcaptchaLoad')
   hcaptchaInject.setAttribute('type', 'text/javascript')
   hcaptchaInject.setAttribute('async', 'true')
   hcaptchaInject.setAttribute('defer', 'true')
@@ -31,6 +31,6 @@ post('/api/verifyinfo', window.verifyToken, undefined, 'json').then(resp => {
 })
 
 // eslint-disable-next-line no-unused-vars
-function recaptchaLoad() {
+function hcaptchaLoad() {
   document.querySelector('#verify').classList.remove('hidden')
 }

@@ -20,10 +20,10 @@ export default {
                 } else {
                     let conf = await db.serverConf.findOne({ server: (client as any).verifyQueue.get(req.headers.token).guild.id }) as ServerConf
                     if (conf.verifiedMsg) {
-                        (client as any).verifyQueue.get(req.headers.token).user.send(conf.verifiedMsg)
+                        (client as any).verifyQueue.get(req.headers.token).user.send({ content: conf.verifiedMsg })
                     }
-                    if (conf.unverifiedRole) await client.guilds.cache.get((client as any).verifyQueue.get(req.headers.token)!.guild.id)!.member((client as any).verifyQueue.get(req.headers.token).user)!.roles.remove(conf.unverifiedRole)
-                    if (conf.verifiedRole) await client.guilds.cache.get((client as any).verifyQueue.get(req.headers.token).guild.id)!.member((client as any).verifyQueue.get(req.headers.token).user)!.roles.add(conf.verifiedRole)
+                    if (conf.unverifiedRole) await client.guilds.cache.get((client as any).verifyQueue.get(req.headers.token)!.guild.id)!.members.cache.get((client as any).verifyQueue.get(req.headers.token).user.id)!.roles.remove(conf.unverifiedRole)
+                    if (conf.verifiedRole) await client.guilds.cache.get((client as any).verifyQueue.get(req.headers.token).guild.id)!.members.cache.get((client as any).verifyQueue.get(req.headers.token).user.id)!.roles.add(conf.verifiedRole)
                     res.writeHead(200, {
                         'Content-Type': 'text/plain; charset=UTF-8',
                         //'strict-transport-security': 'max-age=86400; includeSubDomains; preload'

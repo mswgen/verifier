@@ -6,7 +6,7 @@ if (localStorage.getItem('discord')) {
     }
     if (resp.code == 1) {
       localStorage.removeItem('discord')
-      document.location.href = `https://discord.com/api/oauth2/authorize?client_id=${window.clientID}&redirect_uri=${encodeURIComponent(window.redirectURI)}&response_type=code&scope=identify%20guilds`
+      document.location.href = `https://discord.com/api/oauth2/authorize?client_id=${window.clientID}&redirect_uri=${encodeURIComponent(window.redirectURI)}&response_type=code&scope=identify%20guilds&prompt=none`
       return
     }
     localStorage.setItem('discord', resp.refresh)
@@ -33,7 +33,7 @@ if (localStorage.getItem('discord')) {
     })
   })
 } else {
-  document.location.href = `https://discord.com/api/oauth2/authorize?client_id=${window.clientID}&redirect_uri=${encodeURIComponent(window.redirectURI)}&response_type=code&scope=identify%20guilds`
+  document.location.href = `https://discord.com/api/oauth2/authorize?client_id=${window.clientID}&redirect_uri=${encodeURIComponent(window.redirectURI)}&response_type=code&scope=identify%20guilds&prompt=none`
 }
 
 function displayGuilds(list) {

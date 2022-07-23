@@ -20,7 +20,7 @@ export default {
                         Authorization: `Bearer ${req.headers.authorization}`
                     }
                 }).then(async r => {
-                    if (!r.data.some((x: any) => x.id == post.guildid) || !new Discord.Permissions(r.data.find((x: any) => x.id == post.guildid).permissions).has('MANAGE_GUILD') || !r.data.some((x: any) => client.guilds.cache.get(x.id)?.me?.hasPermission(['MANAGE_GUILD', 'MANAGE_ROLES']))) {
+                    if (!r.data.some((x: any) => x.id == post.guildid) || !new Discord.PermissionsBitField(BigInt(r.data.find((x: any) => x.id == post.guildid).permissions)).has(Discord.PermissionFlagsBits.ManageGuild) || !r.data.some((x: any) => client.guilds.cache.get(x.id)?.members.me?.permissions.has([Discord.PermissionFlagsBits.ManageGuild, Discord.PermissionFlagsBits.ManageRoles]))) {
                         res.writeHead(403)
                         res.end('error')
                         return
@@ -30,12 +30,12 @@ export default {
                         res.end('입력한 채널을 찾을 수 없어요')
                         return
                     }
-                    if (post.channelid && client.guilds.cache.get(post.guildid)!.channels.cache.find(x => x.id == post.channelid)!.type != 'text' && client.guilds.cache.get(post.guildid)!.channels.cache.find(x => x.id == post.channelid)!.type != 'news') {
+                    if (post.channelid && client.guilds.cache.get(post.guildid)!.channels.cache.find(x => x.id == post.channelid)!.type != Discord.ChannelType.GuildText && client.guilds.cache.get(post.guildid)!.channels.cache.find(x => x.id == post.channelid)!.type != Discord.ChannelType.GuildNews) {
                         res.writeHead(200)
                         res.end('채팅 채널, 공지 채널만 입력할 수 있어요')
                         return
                     }
-                    if (post.channelid && !client.guilds.cache.get(post.guildid)!.channels.cache.find(x => x.id == post.channelid)!.permissionsFor(client.user!.id)!.has(['SEND_MESSAGES', 'ADD_REACTIONS', 'MANAGE_MESSAGES'])) {
+                    if (post.channelid && !client.guilds.cache.get(post.guildid)!.channels.cache.find(x => x.id == post.channelid)!.permissionsFor(client.user!.id)!.has([Discord.PermissionFlagsBits.SendMessages, Discord.PermissionFlagsBits.AddReactions, Discord.PermissionFlagsBits.ManageMessages])) {
                         res.writeHead(200)
                         res.end('봇이 입력한 채널에 대해서 메세지 보내기, 메세지 관리, 반응 추가하기 권한이 없어요')
                         return
@@ -56,7 +56,7 @@ export default {
                         res.end('입력한 미인증 역할을 찾을 수 없어요')
                         return
                     }
-                    if (post.unverified && post.unverified != 'none' && (client.guilds.cache.get(post.guildid)!.roles.cache.get(post.unverified)!.position >= client.guilds.cache.get(post.guildid)!.me!.roles.highest.position || client.guilds.cache.get(post.guildid)!.roles.cache.get(post.unverified)!.managed)) {
+                    if (post.unverified && post.unverified != 'none' && (client.guilds.cache.get(post.guildid)!.roles.cache.get(post.unverified)!.position >= client.guilds.cache.get(post.guildid)!.members.me!.roles.highest.position || client.guilds.cache.get(post.guildid)!.roles.cache.get(post.unverified)!.managed)) {
                         res.writeHead(200)
                         res.end('봇이 입력한 미인증 역할을 지급할 수 없어요. 봇 역할 또는 서버 부스터 역할을 선택했다면 일반 역할로 변경해주세요. 그렇지 않으면 verifier의 역할을 선택한 역할 위로 올려주세요.')
                         return
@@ -66,7 +66,7 @@ export default {
                         res.end('입력한 인증 완료 역할을 찾을 수 없어요')
                         return
                     }
-                    if (post.verified && post.verified != 'none' && (client.guilds.cache.get(post.guildid)!.roles.cache.get(post.verified)!.position >= client.guilds.cache.get(post.guildid)!.me!.roles.highest.position || client.guilds.cache.get(post.guildid)!.roles.cache.get(post.verified)!.managed)) {
+                    if (post.verified && post.verified != 'none' && (client.guilds.cache.get(post.guildid)!.roles.cache.get(post.verified)!.position >= client.guilds.cache.get(post.guildid)!.members.me!.roles.highest.position || client.guilds.cache.get(post.guildid)!.roles.cache.get(post.verified)!.managed)) {
                         res.writeHead(200)
                         res.end('봇이 입력한 인증 완료 역할을 지급할 수 없어요. 봇 역할 또는 서버 부스터 역할을 선택했다면 일반 역할로 변경해주세요. 그렇지 않으면 verifier의 역할을 선택한 역할 위로 올려주세요.')
                         return

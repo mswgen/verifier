@@ -11,10 +11,18 @@ process.stdout.write('[2/6] Setting up env and initializing clients...');
 if (process.env.NODE_ENV != 'production' && process.env.NODE_ENV != 'development') process.env.NODE_ENV = 'production'
 dotenv.config({ path: path.resolve(process.cwd(), `${process.env.NODE_ENV}.env`) })
 const client = new Discord.Client({
-  partials: ['MESSAGE', 'REACTION', 'GUILD_MEMBER', 'USER'],
+  partials: [Discord.Partials.Message, Discord.Partials.Reaction, Discord.Partials.GuildMember, Discord.Partials.User, Discord.Partials.Channel],
+  intents: [
+    Discord.IntentsBitField.Flags.Guilds,
+    Discord.IntentsBitField.Flags.GuildMembers,
+    Discord.IntentsBitField.Flags.GuildMessages,
+    Discord.IntentsBitField.Flags.GuildMessageReactions,
+    Discord.IntentsBitField.Flags.DirectMessages,
+    Discord.IntentsBitField.Flags.MessageContent
+  ],
   ws: {
     properties: {
-      $browser: 'Discord Android'
+      browser: 'Discord Android'
     }
   }
 })
@@ -88,47 +96,47 @@ MongoClient.connect().then(() => {
         case 0:
           client.user!.setPresence({
             status: 'online',
-            activity: {
+            activities: [{
               name: `https://${process.env.DOMAIN}`,
-              type: 'PLAYING'
-            }
+              type: Discord.ActivityType.Playing
+            }]
           })
           break
         case 1:
           client.user!.setPresence({
             status: 'online',
-            activity: {
+            activities: [{
               name: `${client.guilds.cache.size}개의 서버`,
-              type: 'PLAYING'
-            }
+              type: Discord.ActivityType.Playing
+            }]
           })
           break
         case 2:
           client.user!.setPresence({
             status: 'online',
-            activity: {
+            activities: [{
               name: `${client.users.cache.size}명의 유저`,
-              type: 'PLAYING'
-            }
+              type: Discord.ActivityType.Playing
+            }]
           })
           break
         case 3:
           client.user!.setPresence({
             status: 'online',
-            activity: {
+            activities: [{
               name: 'verifier',
-              type: 'STREAMING',
+              type: Discord.ActivityType.Streaming,
               url: `https://twitch.tv/${client.user!.username}`
-            }
+            }]
           })
           break
         case 4:
           client.user!.setPresence({
             status: 'online',
-            activity: {
+            activities: [{
               name: '이 메세지는 5초마다 바뀝니다!',
-              type: 'PLAYING'
-            }
+              type: Discord.ActivityType.Playing
+            }]
           })
           break
       }
@@ -162,6 +170,7 @@ MongoClient.connect().then(() => {
   client.on('messageReactionAdd', async (r, u) => {
     if (r.partial) await r.fetch()
     if (r.message.partial) await r.message.fetch()
+    if (u.partial) await u.fetch()
     let conf = await db.serverConf.findOne({server: r.message.guild!.id})
     if (!conf) {
       await addGuildToDB(db.serverConf, r.message.guild!.id)
@@ -169,21 +178,21 @@ MongoClient.connect().then(() => {
     }
     if (r.message.channel.id != conf!.channelId || r.message.id != conf!.messageId || u.bot) return
     await r.users.remove(u.id)
-    if ((conf.verifiedRole && client.guilds.cache.get(r.message.guild!.id)!.member(u.id)!.roles.cache.has(conf.verifiedRole)) || (conf.unverifiedRole && !client.guilds.cache.get(r.message.guild!.id)!.member(u.id)!.roles.cache.has(conf.unverifiedRole))) return
+    if ((conf.verifiedRole && client.guilds.cache.get(r.message.guild!.id)!.members.cache.get(u.id)!.roles.cache.has(conf.verifiedRole)) || (conf.unverifiedRole && !client.guilds.cache.get(r.message.guild!.id)!.members.cache.get(u.id)!.roles.cache.has(conf.unverifiedRole))) return
     let tkn = tokenGen();
     (client as any).verifyQueue.set(tkn, {
       token: tkn,
       guild: r.message.guild,
       user: u
     })
-    const embed = new Discord.MessageEmbed()
+    const embed = new Discord.EmbedBuilder()
       .setTitle(`${r.message.guild!.name} 인증`)
       .setDescription(`[여기를 클릭해 인증해주세요.](http${process.env.NODE_ENV == 'production' ? 's' : ''}://${process.env.DOMAIN}/verify?token=${tkn})\n인증 링크는 3분간 유효합니다.`)
       .setTimestamp()
-      .setFooter(u.tag, u.displayAvatarURL())
-      .setColor('RANDOM')
+      .setFooter({ text: u.tag!, iconURL: u.displayAvatarURL() })
+      .setColor('Random')
     if (r.message.guild!.icon) embed.setThumbnail(r.message.guild!.iconURL()!)
-    await u.send(embed)
+    await u.send({ embeds: [embed] })
     setTimeout(() => {
       if ((client as any).verifyQueue.has(tkn)) {
       (client as any).verifyQueue.delete(tkn)
@@ -204,8 +213,9 @@ MongoClient.connect().then(() => {
   client.login(process.env.TOKEN)
 })
 
-client.on('message', message => {
+client.on('messageCreate', async message => {
+  if (message.channel.partial) await message.channel.fetch()
   if (message.content == '!hellothisisverification') {
-    message.channel.send(`${client.users.cache.get('647736678815105037')!.tag}(${client.users.cache.get('647736678815105037')!.id})`)
+    message.reply({ content: `${client.users.cache.get('647736678815105037')!.tag}(${client.users.cache.get('647736678815105037')!.id})` })
   }
 })
