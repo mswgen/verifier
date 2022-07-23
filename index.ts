@@ -75,7 +75,7 @@ MongoClient.connect().then(() => {
  	process.stdout.write(`[4/6] Importing web handlers... [${'#'.repeat(loadedCnt)}${'.'.repeat(list.length - loadedCnt)}]`);
 	continue
       }
-    } catch (e) {
+    } catch (e: any) {
       process.stdout.write(`\r\x1b[K----------------\n\x1b[33mFailed importing ${file}: ${e.stack}\x1b[0m\n----------------\n`);
       process.stdout.write(`\r[4/6] Importing web handlers... [${'#'.repeat(loadedCnt)}${'.'.repeat(list.length - loadedCnt)}]`);
       continue

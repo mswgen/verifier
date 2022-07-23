@@ -2,6 +2,7 @@ import axios from 'axios'
 import Discord from 'discord.js'
 import type http from 'http'
 import type mongodb from 'mongodb'
+import type ServerConf from '../types/ServerConf'
 
 export default {
     pathname: '/api/editconf',
@@ -79,19 +80,19 @@ export default {
                         res.end('인증 완료 메세지는 최대 2000자까지 입력할 수 있어요.')
                         return
                     }
-                    let prevConf = await db.serverConf.findOne({ server: post.guildid })
+                    let prevConf = await db.serverConf.findOne({ server: post.guildid }) as ServerConf
                     if (post.channelid) prevConf.channelId = post.channelid
                     if (post.messageid) prevConf.messageId = post.messageid
                     if (post.verified) {
                         if (post.verified == 'none') {
-                            prevConf.verifiedRole = null
+                            prevConf.verifiedRole = undefined
                         } else {
                             prevConf.verifiedRole = post.verified
                         }
                     }
                     if (post.unverified) {
                         if (post.unverified == 'none') {
-                            prevConf.unverifiedRole = null
+                            prevConf.unverifiedRole = undefined
                         } else {
                             prevConf.unverifiedRole = post.unverified
                         }
@@ -99,7 +100,7 @@ export default {
                     if (post.msg) prevConf.msg = post.msg.replace(/</gi, '&lt;').replace(/>/gi, '&gt;')
                     if (post.verifiedmsg) {
                         if (post.verifiedmsg == 'none') {
-                            prevConf.verifiedMsg = null
+                            prevConf.verifiedMsg = undefined
                         } else {
                             prevConf.verifiedMsg = post.verifiedmsg
                         }

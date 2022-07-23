@@ -2,6 +2,7 @@ import axios from 'axios'
 import type Discord from 'discord.js'
 import type http from 'http'
 import type mongodb from 'mongodb'
+import type ServerConf from '../types/ServerConf'
 
 export default {
     pathname: '/api/verify',
@@ -17,7 +18,7 @@ export default {
                     res.writeHead(400)
                     res.end('hCaptcha authentication failed')
                 } else {
-                    let conf = await db.serverConf.findOne({ server: (client as any).verifyQueue.get(req.headers.token).guild.id })
+                    let conf = await db.serverConf.findOne({ server: (client as any).verifyQueue.get(req.headers.token).guild.id }) as ServerConf
                     if (conf.verifiedMsg) {
                         (client as any).verifyQueue.get(req.headers.token).user.send(conf.verifiedMsg)
                     }

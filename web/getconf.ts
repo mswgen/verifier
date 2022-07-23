@@ -2,6 +2,7 @@ import axios from 'axios'
 import Discord from 'discord.js'
 import type http from 'http'
 import type mongodb from 'mongodb'
+import type ServerConf from '../types/ServerConf'
 
 export default {
   pathname: '/api/getconf',
@@ -23,7 +24,7 @@ export default {
             res.end('You can\'t change settings of this guild.')
             return
           }
-          const dbVal = await db.serverConf.findOne({server: post})
+          const dbVal = await db.serverConf.findOne({server: post}) as ServerConf
           res.writeHead(200)
           res.end(JSON.stringify({
             channelid: dbVal.channelId,
