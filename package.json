@@ -33,7 +33,7 @@
   "homepage": "https://github.com/mswgen/verifier#readme",
   "devDependencies": {
     "@types/node": "^18.0.6",
-    "autoprefixer": "^10.4.7",
+    "autoprefixer": "^10.4.8",
     "cross-env": "^7.0.3",
     "cssnano": "^5.1.12",
     "cssnano-preset-default": "^5.2.12",
