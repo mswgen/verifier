@@ -38,7 +38,7 @@
     "cssnano": "^5.1.12",
     "cssnano-preset-default": "^5.2.12",
     "eslint": "^8.20.0",
-    "postcss": "^8.4.14",
+    "postcss": "^8.4.16",
     "postcss-cli": "^10.0.0",
     "run-script-os": "^1.1.6",
     "tailwindcss": "^3.1.7",
