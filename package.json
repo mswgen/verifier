@@ -37,7 +37,7 @@
     "cross-env": "^7.0.3",
     "cssnano": "^5.1.12",
     "cssnano-preset-default": "^5.2.12",
-    "eslint": "^8.20.0",
+    "eslint": "^8.25.0",
     "postcss": "^8.4.14",
     "postcss-cli": "^10.0.0",
     "run-script-os": "^1.1.6",
