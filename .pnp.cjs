@@ -86,7 +86,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["discord-api-types", "npm:0.36.3"],\
             ["file-type", "npm:17.1.4"],\
             ["tslib", "npm:2.4.0"],\
-            ["undici", "npm:5.8.0"]\
+            ["undici", "npm:5.19.1"]\
           ],\
           "linkType": "HARD"\
         }]\
@@ -649,6 +649,16 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["buffer", "npm:5.7.1"],\
             ["base64-js", "npm:1.5.1"],\
             ["ieee754", "npm:1.2.1"]\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
+      ["busboy", [\
+        ["npm:1.6.0", {\
+          "packageLocation": "./.yarn/cache/busboy-npm-1.6.0-ebb5cbb04b-32801e2c01.zip/node_modules/busboy/",\
+          "packageDependencies": [\
+            ["busboy", "npm:1.6.0"],\
+            ["streamsearch", "npm:1.1.0"]\
           ],\
           "linkType": "HARD"\
         }]\
@@ -1239,7 +1249,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["fast-deep-equal", "npm:3.1.3"],\
             ["lodash.snakecase", "npm:4.1.1"],\
             ["tslib", "npm:2.4.0"],\
-            ["undici", "npm:5.8.0"],\
+            ["undici", "npm:5.19.1"],\
             ["ws", "virtual:996e23365c9d9bf94ef007bcc674bece4bcb9c70a72917cf24788f988adb10abab9bb1b02aff4cbd1ddd611d0ebd5f24e6f5138570eaeb00cca2e1ef77076980#npm:8.8.1"]\
           ],\
           "linkType": "HARD"\
@@ -4026,6 +4036,15 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "linkType": "HARD"\
         }]\
       ]],\
+      ["streamsearch", [\
+        ["npm:1.1.0", {\
+          "packageLocation": "./.yarn/cache/streamsearch-npm-1.1.0-fc3ad6536d-1cce16cea8.zip/node_modules/streamsearch/",\
+          "packageDependencies": [\
+            ["streamsearch", "npm:1.1.0"]\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
       ["string-width", [\
         ["npm:4.2.2", {\
           "packageLocation": "./.yarn/cache/string-width-npm-4.2.2-aa12d6b759-343e089b0e.zip/node_modules/string-width/",\
@@ -4300,10 +4319,11 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
         }]\
       ]],\
       ["undici", [\
-        ["npm:5.8.0", {\
-          "packageLocation": "./.yarn/cache/undici-npm-5.8.0-905e943aab-7b486ad064.zip/node_modules/undici/",\
+        ["npm:5.19.1", {\
+          "packageLocation": "./.yarn/cache/undici-npm-5.19.1-aad6efa6ea-57ee94ee74.zip/node_modules/undici/",\
           "packageDependencies": [\
-            ["undici", "npm:5.8.0"]\
+            ["undici", "npm:5.19.1"],\
+            ["busboy", "npm:1.6.0"]\
           ],\
           "linkType": "HARD"\
         }]\
